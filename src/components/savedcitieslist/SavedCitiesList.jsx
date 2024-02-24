@@ -5,7 +5,7 @@ import {PreferencesContext} from "../../context/PreferencesContext";
 import WeatherHomeCard from "../weatherCard/WeatherCard";
 
 
-function SavedCityList() {
+function SavedCitiesList() {
     const [cityList] = useContext(CityContext)
     const [preferencesList] = useContext(PreferencesContext)
     const [cityListWeatherData, setCityListWeatherData] = useState([])
@@ -77,4 +77,4 @@ function SavedCityList() {
     )
 }
 
-export default SavedCityList
+export default SavedCitiesList

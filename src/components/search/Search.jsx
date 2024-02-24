@@ -8,7 +8,7 @@ function Search ({setLocationHandler}) {
         setLocationHandler(request);
  }
  function keyPressCheck(e){
-        if (e.KeyCode===13){
+        if (e.keyCode===13){
             setLocationHandler(request)
         }
  }

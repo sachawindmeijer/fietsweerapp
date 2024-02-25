@@ -1,0 +1,15 @@
+.city-card {
+    background: rgba(228, 223, 218, 0.6);
+    box-shadow: 0 4px 10px -2px #000000;
+    border: 2px solid black;
+    margin: 10px 0 0 0;
+    padding: 5px;
+}
+
+.button {
+    padding: 2px;
+}
+
+.city-input {
+    padding: 2px;
+}

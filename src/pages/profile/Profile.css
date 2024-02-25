@@ -1,0 +1,56 @@
+.background {
+    background-image: url("../../assets/backgrounds/beautiful-shot-misty-foggy-mysterious-forest.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    overflow: auto;
+}
+
+.outer-container {
+    padding: 15px 20px 10px 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 500px;
+}
+
+.text-city-pref-container{
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+}
+
+.text-container {
+    border-radius: 8px;
+    background-color: darkblue;
+    padding: 5px 10px 5px 10px;
+}
+
+.city-and-preferences-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 8px;
+    margin: 8px;
+    justify-content: center;
+}
+
+.saved-cities-container {
+    min-width: 260px;
+    padding: 8px;
+    background: orangered;
+    border-radius: 5px;
+    margin: 8px;
+}
+
+.preferences-container {
+    padding: 5px;
+    background: green;
+    border-radius: 5px;
+    margin: 8px;
+}
+
+
+.preferences-input-wrapper {
+    margin: 10px 0 10px 0;
+}

@@ -26,7 +26,7 @@ function HeaderWeather() {
 
     return (
         <header className="headerBar">
-            <h1>WeatherWhere</h1>
+            <h1>Fietsweer</h1>
             <h3>{getPageName()}</h3>
         </header>
     )

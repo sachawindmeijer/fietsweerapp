@@ -1,34 +1,41 @@
 import React, {useState} from 'react';
-import "./SearchBar.css"
 
-function Search ({setLocationHandler}) {
-    const [request, setRequest]=useState('')
+import "./Search.css"
 
- function handleClick(){
-        setLocationHandler(request);
- }
- function keyPressCheck(e){
-        if (e.keyCode===13){
-            setLocationHandler(request)
+function SearchBar({setLocationHandler}) {
+    const [query, setQuery] = useState('');
+
+    function handleClick() {
+        setLocationHandler(query);
+    }
+
+    function keyPressCheck(e) {
+        if (e.keyCode === 13) {
+            setLocationHandler(query);
         }
- }
-    return(
-        <span className"searchbar">
-            <input
-                type="text"
-                name="search"
-                value={request}
-                onChange={(e)=>setRequest(e.target.value)}
-onKeyUp={keyPressCheck}
-                placeholder="zoek een locatie"
-                className="searchbar-entry"/>
-            <button
-                type="button"
-                onClick={handleClick}
-                className="searchbar-button"
-                >zoek</button>
-        </span>
-    )
-}
-export default Search
+    }
 
+    return (
+        <span className="searchbar">
+      <input
+          type="text"
+          name="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyUp={keyPressCheck}
+          placeholder="Zoek een locatie"
+          className="searchbar-entry"
+      />
+
+      <button
+          type="button"
+          onClick={handleClick}
+          className="searchbar-button"
+      >
+        Zoek
+      </button>
+    </span>
+    );
+}
+
+export default SearchBar;

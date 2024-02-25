@@ -6,7 +6,7 @@ import windSpeed from "../../helpers/windSpeed";
 import windSockIcon from "../../assets/icons/windsock.jpg"
 import humidityIcon from "../../assets/icons/humidity.png"
 import cloudIcon from "../../assets/icons/clouds blue.png"
-import "./WeatherHomeCard.css"
+import "./WeatherCard.css"
 
 
 

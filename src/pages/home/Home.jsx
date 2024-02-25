@@ -1,9 +1,10 @@
+//home.jsx
 import React, {useEffect, useState, useContext} from "react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import './Home.css'
 import kelvinToCelcius from "../../helpers/kelvinToCelsius";
-
+// import { REACT_APP_API_KEY } from "../../../.env.dist"
 import iconWeather from "../../helpers/iconWeather.jsx";
 import windDirection from "../../helpers/windDirection";
 import windSpeed from "../../helpers/windSpeed";
@@ -25,7 +26,7 @@ function Home() {
             setError(false);
             toggleLoading(true);
             try {
-                const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=}&lang=nl`);
+                const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=&lang=nl`);
                 setWeatherData(result.data);
             } catch (e) {
                 console.error(e);

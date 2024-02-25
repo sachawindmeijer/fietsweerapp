@@ -1,48 +1,45 @@
-import { useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import {AuthContext} from "../../context/AuthContext.jsx";
-
+import React, {useContext} from "react";
+import {NavLink} from "react-router-dom";
+import {AuthContext} from "../../context/AuthContext";
+import './navBar.css'
 
 function NavBar() {
-    const { isAuth, logout } = useContext(AuthContext);
-    const navigate = useNavigate();
+    const {loggedIn, logout} = useContext(AuthContext)
 
     return (
-        <nav>
-            <Link to="/">
-          <span className="logo-container">
-            {/*<img src={logo} alt="logo"/>*/}
-            <h3>
-              Strand fiets weer
-            </h3>
-          </span>
-            </Link>
-
-            {isAuth ?
-                <button
-                    type="button"
-                    onClick={logout}
-                >
-                    Log uit
-                </button>
-                :
-                <div>
-                    <button
-                        type="button"
-                        onClick={() => navigate('/signin')}
+        <nav className="outer-container">
+            <ul className="nav-links">
+                <li>
+                    <NavLink to="/" exact
+                             className="navbar-link"
+                    >
+                        Home
+                    </NavLink>
+                </li>
+                <li>
+                    {loggedIn ? <NavLink
+                        to="/loguit"
+                        onClick={logout}
+                        className="navbar-link"
+                    >
+                        Log Uit
+                    </NavLink> : <NavLink
+                        to="/login"
+                        className="link"
                     >
                         Log in
-                    </button>
-                    <button
-                        type="button"
-                        onClick={() => navigate('/signup')}
+                    </NavLink>}
+                </li>
+                <li>
+                    <NavLink to="/profiel"
+                             className="link"
                     >
-                        Registreren
-                    </button>
-                </div>
-            }
+                        Profiel
+                    </NavLink>
+                </li>
+            </ul>
         </nav>
-    );
+    )
 }
 
-export default NavBar;
+export default NavBar

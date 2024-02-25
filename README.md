@@ -24,7 +24,7 @@ Instructies om de applicatie te installeren en te runnen:
 
     1) Clone de repository 
 ```bash
-  https://github.com/Cakeageddon/WeatherWhere.git
+  https://github.com/
 ```
 2) Installeer de dependencies door de terminal van jouw IDE.
 

@@ -12,14 +12,13 @@ Deze applicatie toont het huidige weer en de weersvoorspelling voor de dag zelf.
 
 ![Fietsweerapp](src/assets/Fietsweerapp.png)
 
+
 <a name="benodigdheden"></a>
 ## Benodigdheden
 
 <<<<<<< HEAD
 1) Voor dit project heb ik een API key van OpenWeatherMap.org (https://openweathermap.org/api) gebruikt. De benodigde API key voor beoordelaars kan worden gevonden in het functioneel ontwerp van dit project aan het einde van de inleiding.
-=======
-1) Voor dit project heb ik een API key van OpenWeatherMap.org (https://openweathermap.org/api) gebruikt. De benodigde API key voor beoordelaars kan worden gevonden in het functioneel ontwerp van dit project aan het einde van de inleidingspagina.
->>>>>>> 7f73f16a57b80a37636e1ba777316b967f68aeef
+
 2) NPM - Node Package Manager 
 
 <a name="Instaleren"></a>
@@ -28,11 +27,8 @@ Instructies om de applicatie te installeren en te runnen:
 
     1) Clone de repository 
 ```bash
-<<<<<<< HEAD
+
   https://github.com/sachawindmeijer/fietsweer
-=======
-  https://github.com/
->>>>>>> 7f73f16a57b80a37636e1ba777316b967f68aeef
 ```
 2) Installeer de dependencies door de terminal van jouw IDE.
 
@@ -61,8 +57,3 @@ Tijdens de registratie moet je aan de volgende eisen voldoen:
         Je e-mailadres moet een @-symbool bevatten.
 2)    Wachtwoord:
         Je wachtwoord moet minimaal 6 tekens lang zijn.
-<<<<<<< HEAD
-    
-=======
-    
->>>>>>> 7f73f16a57b80a37636e1ba777316b967f68aeef

@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext";
 import './navBar.css'
 
@@ -10,32 +10,32 @@ function NavBar() {
         <nav className="outer-container">
             <ul className="nav-links">
                 <li>
-                    <NavLink to="/" exact
+                    <Link to="/" exact
                              className="navbar-link"
                     >
                         Home
-                    </NavLink>
+                    </Link>
                 </li>
                 <li>
-                    {loggedIn ? <NavLink
+                    {loggedIn ? <Link
                         to="/loguit"
                         onClick={logout}
                         className="navbar-link"
                     >
                         Log Uit
-                    </NavLink> : <NavLink
+                    </Link> : <Link
                         to="/login"
                         className="link"
                     >
                         Log in
-                    </NavLink>}
+                    </Link>}
                 </li>
                 <li>
-                    <NavLink to="/profiel"
+                    <Link to="/profiel"
                              className="link"
                     >
                         Profiel
-                    </NavLink>
+                    </Link>
                 </li>
             </ul>
         </nav>

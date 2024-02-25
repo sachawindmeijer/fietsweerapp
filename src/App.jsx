@@ -10,7 +10,6 @@ import Profile from "./pages/profile/Profile.jsx";
 
 
 function App() {
-    // const { isAuth } = useContext(AuthContext);
 
     return (
         <>

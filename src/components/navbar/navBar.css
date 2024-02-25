@@ -1,22 +1,22 @@
-.nav-outer-container {
-    background: #c1666b;
+.outer-container {
+    background: whitesmoke;
 }
 
 
-.nav-links {
+.links {
     list-style: none;
     display: flex;
     justify-content: flex-end;
     padding: 10px;
 }
 
-.nav-links li {
-    margin: 0 0 10px 20px;
+.links li {
+    margin: 0 0 50px 20px;
 }
 
-.navbar-link {
-    background-color: #e4dfda;
-    border-radius: 8px;
-    padding: 5px;
-    text-decoration: none;
-}
+/*.link {*/
+/*    background-color: deepskyblue;*/
+/*    border-radius: 8px;*/
+/*    padding: 5px;*/
+/*    text-decoration: none;*/
+/*}*/

@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
 import {CityContext} from "../../context/CityContext";
 import {PreferencesContext} from "../../context/PreferencesContext";
-import WeatherHomeCard from "../weatherCard/WeatherCard";
+import WeatherCard from "../weatherCard/WeatherCard";
 
 
 function SavedCitiesList() {
@@ -37,7 +37,7 @@ function SavedCitiesList() {
                 setError(true)
             }
         }
-        exec();
+        void exec();
     }, [cityList])
 
 
@@ -60,7 +60,7 @@ function SavedCitiesList() {
                     :
                     <section className="weatherCards">
                         {cityListWeatherData && cityListWeatherData.map((cityWeather) => {
-                            return <WeatherHomeCard
+                            return <WeatherCard
                                 key={cityWeather.name}
                                 name={cityWeather.name}
                                 tempK={cityWeather.main.temp}

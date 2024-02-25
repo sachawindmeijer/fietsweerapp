@@ -1,6 +1,6 @@
 import React from "react";
 // import {Link} from "react-router-dom";
-import "/profile.css"
+import './Profile.css'
 import HeaderWeather from "../../components/header/headerWeather.jsx";
 import NavBar from "../../components/navbar/NavBar.jsx";
 import SaveCities from "../../components/savecities/SaveCities.jsx";

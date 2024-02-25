@@ -1,6 +1,5 @@
 # Fietsweerapp 
 
-
 ## Inhoudsopgave
 1. [Introductie](#introductie)
 2. [Benodigdheden](#benodigdheden)

@@ -46,7 +46,7 @@ function Register() {
             });
 
             // als alles goed gegaan is, linken we door naar de login-pagina
-            navigate('/signin');
+            navigate('/login');
         } catch (e) {
             console.error(e);
             toggleError(true);
@@ -133,7 +133,7 @@ function Register() {
 
                     </form>
                 </section>
-                <p>Heb je al een account? Je kunt je <Link to="/signin">hier</Link> inloggen.</p>
+                <p>Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.</p>
             </div>
         </div>
     );

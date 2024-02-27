@@ -16,7 +16,7 @@ Deze applicatie toont het huidige weer en de weersvoorspelling voor de dag zelf.
 <a name="benodigdheden"></a>
 ## Benodigdheden
 
-<<<<<<< HEAD
+
 1) Voor dit project heb ik een API key van OpenWeatherMap.org (https://openweathermap.org/api) gebruikt. De benodigde API key voor beoordelaars kan worden gevonden in het functioneel ontwerp van dit project aan het einde van de inleiding.
 
 2) NPM - Node Package Manager 

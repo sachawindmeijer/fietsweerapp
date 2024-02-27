@@ -4,7 +4,6 @@ import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import './Home.css'
 import kelvinToCelcius from "../../helpers/kelvinToCelsius";
-// import { REACT_APP_API_KEY } from "../../../.env.dist"
 import iconWeather from "../../helpers/iconWeather.jsx";
 import windDirection from "../../helpers/windDirection";
 import windSpeed from "../../helpers/windSpeed";
@@ -18,7 +17,7 @@ function Home() {
     const [location, setLocation] = useState('');
     const [weatherData, setWeatherData] = useState(null);
     const [loading, toggleLoading] = useState(false);
-    const {loggedIn} = useContext(AuthContext)
+    const {isAuth} = useContext(AuthContext)
 
 
 
@@ -46,7 +45,7 @@ function Home() {
             <HeaderWeather/>
             <NavBar/>
             <div className="outer-container">
-                {loggedIn ?
+                {isAuth ?
                     <section className="saved-cities-list-container">
                         <SavedCitiesList/>
                     </section>

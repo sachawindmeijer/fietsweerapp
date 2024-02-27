@@ -5,6 +5,7 @@ import {useForm} from 'react-hook-form'
 import axios from 'axios';
 import HeaderWeather from "../../components/header/headerWeather.jsx";
 import NavBar from "../../components/navbar/NavBar.jsx";
+import "./SignIn.css"
 
 function SignIn() {
     const {handleSubmit, register} = useForm();
@@ -48,7 +49,7 @@ function SignIn() {
             <HeaderWeather/>
             <NavBar/>
             <div className="outer-container">
-                <section className="signin-form-container">
+                <section className="form-container">
                     <p>Vul het formulier in om in te loggen</p>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="form">
@@ -83,9 +84,8 @@ function SignIn() {
                         </button>
                     </form>
 
-                    <p>Heb je nog geen account? <Link to="/signup">Registreer</Link> je dan eerst.</p>
-
                 </section>
+                <p className="out-text">Heb je nog geen account? <Link to="/registreren">Registreer</Link> je dan eerst.</p>
             </div>
         </div>
     )

@@ -13,7 +13,9 @@ function Register() {
         handleSubmit,
         formState: {errors},
         register
-    } = useForm();
+    } = useForm({
+        criteriaMode: "all"
+    });
 
     // state voor functionaliteit
     const [error, toggleError] = useState(false);
@@ -61,14 +63,13 @@ function Register() {
             <NavBar/>
             <div className="outer-container">
                 <section className="form-container">
-                    <h1>Registreren</h1>
                     <p>Het het formulier in om je te kunnen aanmeleden</p>
                     <form onSubmit={handleSubmit(onSubmit)} className="form">
                         <label htmlFor="email-field" className="input-container">
                             Gebruikersnaam:
                             <input
                                 type="text"
-                                id="gebruikersnaam-field"
+                                id="username-field"
                                 {...register("username", {
                                     required: "Dit moet ingevuld zijn",
                                 })}

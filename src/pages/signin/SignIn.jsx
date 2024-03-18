@@ -26,7 +26,7 @@ function SignIn() {
         toggleError(false);
 
         try {
-            const result = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin', {
+            const result = await axios.get('https://frontend-educational-backend.herokuapp.com/api/test/all', {
                 email: data.email,
                 password: data.password
             }, {

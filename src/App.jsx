@@ -7,6 +7,7 @@ import Register from './pages/register/Register.jsx';
 import SignOut from "./pages/signout/SignOut.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 // import NavBar from "./components/navbar/NavBar.jsx";
+import "./App.css"
 
 
 function App() {

@@ -7,10 +7,50 @@ is het voor deze opdracht wel gedaan!*/
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Jockey One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+
 }
+body{
+  font-family: "Jockey One", sans-serif;
+
+}
+p {
+  font-size: 16px;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+h4 {
+  font-size: 20px;
+  color: #ffffff
+
+}
+
+input {
+  font-size: 16px;
+}
+
+/*.form-container {*/
+/*    display: flex;*/
+/*    max-width: 70%;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    background: #ffffff;*/
+/*    margin: 10px;*/
+/*    padding: 40px;*/
+/*    border-radius: 15px;*/
+/*    text-align: center;*/
+/*}*/
+
 
 
 /*Algemene button styling*/
@@ -25,8 +65,16 @@ is het voor deze opdracht wel gedaan!*/
 /*}*/
 
 /*Zorgt ervoor dat als twee buttons naast elkaar staan, er altijd ruimte tussen blijft*/
-button + button {
-  margin-left: 8px;
+button {
+  margin-left: 160px;
+  background-color: transparent;
+  padding: 2px 20px 24px 48px;
+  border: none;
+  color: #ffffff;
+  font-size:18px;
+  justify-content: space-between;
+  font-weight: bold;
+
 }
 
 button:hover {
@@ -34,7 +82,7 @@ button:hover {
 }
 
 button:disabled {
-  background-color: #FAD57F;
+  background-color: #ff4500;
 }
 
 a,
@@ -51,10 +99,11 @@ a:hover {
 form {
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: #2a5fff;
   padding: 32px;
   max-width: 300px;
   border-radius: 4px;
+    color: white;
 }
 
 form label {
@@ -68,9 +117,9 @@ form input {
   margin: 6px 0;
 }
 
-h2 {
-  margin: 32px 0 24px 0;
-}
+/*h2 {*/
+/*  margin: 32px 0 24px 0;*/
+/*}*/
 
 .content {
   margin: 32px;
@@ -81,8 +130,8 @@ h2 {
 }
 
 nav {
-  background-color: orangered;
-  color: white;
+  /*background-color: orangered;*/
+  /*color: white;*/
   display: flex;
   padding: 0 32px;
   align-items: center;
@@ -92,27 +141,27 @@ nav {
 nav a,
 nav a:visited,
 nav a:active {
-  color: white;
+  color: #2a5fff;
 }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 150px;
-}
+/*.logo-container {*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: space-between;*/
+/*  width: 150px;*/
+/*}*/
 
-.logo-container img {
-  width: 40px;
-  margin-right: 8px;
-}
+/*.logo-container img {*/
+/*  width: 40px;*/
+/*  margin-right: 8px;*/
+/*}*/
 
-section  {
-  margin: 0 0 50px 0;
-}
+/*section  {*/
+/*  margin: 0 0 10px 0;*/
+/*}*/
 
 .error {
-  color: orangered;
+  color: #ea7e1f;
 }
 
 /*Zet mij op een element en ik blijf voor altijd draaien!*/

@@ -36,7 +36,7 @@ function Preferences() {
         <form onSubmit={handleSubmit(onSubmit)}>
             <article>
                 <p>Temperatuurvoorkeur</p>
-                <p>koud<input type="range" placeholder="temperature" {...register("temperature",{})}/> </p>
+                <p>koud<input type="range" placeholder="temperature" {...register("temperature",{})}/> Heel Warm </p>
             </article>
             <article>
                 <p>Bewolking:{watchCloudiness}%</p>
@@ -44,7 +44,7 @@ function Preferences() {
             </article>
             <article>
                 <p>wind op schaal: {watchWindspeed}</p>
-                <input type="rang" placeholder="windspeed" max="12" {...register("windspeed",{})}/>
+                <input type="range" placeholder="windspeed" max="12" {...register("windspeed",{})}/>
             </article>
             <button
                 type="submit"

@@ -11,9 +11,7 @@ function HeaderWeather() {
                 return "Home"
             case "/login" :
                 return "Login"
-            case "/wachtwoord-verandering" :
-                return "Wachtwoord verandering"
-            case "/registratie" :
+            case "/registreren" :
                 return "Account Registratie"
             case "/profiel" :
                 return "Profiel"
@@ -26,7 +24,7 @@ function HeaderWeather() {
 
     return (
         <header className="headerBar">
-            <h1>Fietsweer</h1>
+            <h1>FIETSWEER</h1>
             <h3>{getPageName()}</h3>
         </header>
     )

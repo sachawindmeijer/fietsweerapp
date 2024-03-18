@@ -1,15 +1,19 @@
 .city-card {
     background: white;
-    box-shadow: 0 4px 10px -2px #000000;
-    /*border: 2px solid black;*/
-    margin: 10px 0 0 0;
-    padding: 5px;
+color: black;
+    margin: 20px 0 0 0;
+    padding: 2px;
 }
 
 .button {
     padding: 2px;
+    color: #2a5fff;
 }
 
 .city-input {
     padding: 2px;
+
+}
+.stadnaam{
+    color: black;
 }

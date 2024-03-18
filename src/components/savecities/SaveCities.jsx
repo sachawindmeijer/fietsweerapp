@@ -38,7 +38,8 @@ function SaveCities() {
 
     return (
         <section className="savecity-container">
-            <p>Opgeslagen steden: (max 5)</p>
+            <h4>Pas jouw voorkeuren hier aan.</h4>
+            <p>Opgeslagen steden: (max 3)</p>
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -47,7 +48,7 @@ function SaveCities() {
                     onChange={(e) => setCity(e.target.value)}
                     placeholder="Voer hier de stad in"
                 />
-                <button type="submit" className="button" disabled={citiesList.length === 5}>
+                <button type="submit"  disabled={citiesList.length === 3}>
                     Voeg stad toe
                 </button>
             </form>
@@ -57,7 +58,7 @@ function SaveCities() {
             const {id, location} = city;
             return (
                 <article key={id} className="city-card">
-                    <p className="city">{location}</p>
+                    <p className="stadnaam">{location}</p>
                     <button
                         type="button"
                         onClick={() => deleteCity(id)}

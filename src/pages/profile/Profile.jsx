@@ -12,10 +12,7 @@ function Profile() {
             <HeaderWeather/>
             <NavBar/>
             <div className="outer-container">
-                <div className="text-city-pref-container">
-                     <span className="text-container">
-                         <p>Pas jouw voorkeuren hier aan.</p>
-                     </span>
+
                     <div className="city-and-preferences-container">
                         <section className="saved-cities-container">
                             <SaveCities/>
@@ -24,7 +21,7 @@ function Profile() {
                             <Preferences/>
                         </section>
                     </div>
-                </div>
+
             </div>
         </div>
     )

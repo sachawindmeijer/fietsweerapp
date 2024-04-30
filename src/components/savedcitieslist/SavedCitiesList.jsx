@@ -1,8 +1,9 @@
 import React, {useContext, useEffect, useState} from "react";
 import axios from "axios";
-import {CityContext} from "../../context/CityContext";
+
 import {PreferencesContext} from "../../context/PreferencesContext";
 import WeatherCard from "../weatherCard/WeatherCard";
+import {CityContext} from "../../context/CityContext.jsx";
 
 
 function SavedCitiesList() {

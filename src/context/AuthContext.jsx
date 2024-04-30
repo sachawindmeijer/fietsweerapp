@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
 import axios from 'axios';
 
 export const AuthContext = createContext( {} );
@@ -20,7 +20,7 @@ function AuthContextProvider( { children } ) {
 
     // als er WEL een token is, haal dan opnieuw de gebruikersdata op
     if ( token ) {
-      const decoded = jwt_decode( token );
+      const decoded = jwtDecode( token );
       void fetchUserData( decoded.sub, token );
     } else {
       // als er GEEN token is doen we niks, en zetten we de status op 'done'
@@ -60,7 +60,7 @@ function AuthContextProvider( { children } ) {
   async function fetchUserData( id, token, redirectUrl ) {
     try {
       // haal gebruikersdata op met de token en id van de gebruiker
-      const data = await axios.get( `https://frontend-educational-backend.herokuapp.com/api/user/${id}`, {
+      const result = await axios.get( `https://frontend-educational-backend.herokuapp.com/api/user/`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${ token }`,
@@ -72,9 +72,9 @@ function AuthContextProvider( { children } ) {
         ...isAuth,
         isAuth: true,
         user: {
-          username: data.data.username,
-          email: data.data.email,
-          id: data.data.id,
+          username: result.data.username,
+          email: result.data.email,
+          id: result.data.id,
         //   data was eerst result
         },
         status: 'done',

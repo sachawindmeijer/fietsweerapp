@@ -9,24 +9,17 @@ import "./Register.css"
 
 function Register() {
     // hookform voor het formulier
-    const {
-        handleSubmit,
-        formState: {errors},
-        register
-    } = useForm({
-        criteriaMode: "all"
-    });
+   const {handleSubmit, register}=useForm()
 
     // state voor functionaliteit
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
-    const navigate = useNavigate();
 
-    // we maken een canceltoken aan voor ons netwerk-request
+    const navigate = useNavigate();
     const source = axios.CancelToken.source();
 
-    // mocht onze pagina ge-unmount worden voor we klaar zijn met data ophalen, aborten we het request
+
     useEffect(() => {
         return function cleanup() {
             source.cancel();
@@ -34,12 +27,12 @@ function Register() {
     }, []);
 
     async function onSubmit(data) {
-        console.log(data)
+        console.log(data);
         toggleError(false);
         toggleLoading(true);
 
         try {
-            await axios.post('`https://frontend-educational-backend.herokuapp.com/api/auth/signup', {
+           await axios.post('`https://frontend-educational-backend.herokuapp.com/api/auth/signup', {
                 email: data.email,
                 username: data.username,
                 password: data.password
@@ -53,8 +46,10 @@ function Register() {
             console.error(e);
             toggleError(true);
         }
+            toggleLoading(false);
 
-        toggleLoading(false);
+
+
     }
 
     return (

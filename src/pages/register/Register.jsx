@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form'
 import axios from 'axios';
@@ -17,14 +17,14 @@ function Register() {
 
 
     const navigate = useNavigate();
-    const source = axios.CancelToken.source();
-
-
-    useEffect(() => {
-        return function cleanup() {
-            source.cancel();
-        }
-    }, []);
+    // const source = axios.CancelToken.source();
+    //
+    //
+    // useEffect(() => {
+    //     return function cleanup() {
+    //         source.cancel();
+    //     }
+    // }, []);
 
     async function onSubmit(data) {
         console.log(data);
@@ -32,12 +32,12 @@ function Register() {
         toggleLoading(true);
 
         try {
-           await axios.post('`https://frontend-educational-backend.herokuapp.com/api/auth/signup', {
+            await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", {
                 email: data.email,
                 username: data.username,
                 password: data.password
-            }, {
-                cancelToken: source.token,
+            // }, {
+            //     cancelToken: source.token,
             });
 
             // als alles goed gegaan is, linken we door naar de login-pagina

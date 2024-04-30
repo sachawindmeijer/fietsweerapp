@@ -10,7 +10,7 @@ function isTokenValid(token) {
 
         // Ensure the decoded token has an 'exp' (expiration time) claim
         if (!decodedToken.exp) {
-            console.error("Token is missing expiration time (exp) claim.");
+            console.error("Token mist claim voor vervaltijd .");
             return false;
         }
 
@@ -21,7 +21,7 @@ function isTokenValid(token) {
         const currentTime = Math.floor(Date.now() / 1000); // More efficient for seconds
         return expirationTime > currentTime;
     } catch (error) {
-        console.error("Error decoding token:", error);
+        console.error("Fout bij het decoderen van token:", error);
         return false;
     }
 }

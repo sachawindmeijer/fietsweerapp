@@ -1,49 +1,78 @@
 import { createContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode';
+import jwtDecode from "jwt-decode";
 import axios from 'axios';
+import isTokenValid from "../helpers/isTokenValid.jsx";
 
 export const AuthContext = createContext( {} );
 
 function AuthContextProvider( { children } ) {
   const [ isAuth, toggleIsAuth ] = useState( {
-    isAuth: false,
+    isAuthenticated: false,
     user: null,
     status: 'pending',
   } );
   const navigate = useNavigate();
 
   // MOUNTING EFFECT
-  useEffect( () => {
-    // haal de JWT op uit Local Storage
-    const token = localStorage.getItem( 'token' );
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-    // als er WEL een token is, haal dan opnieuw de gebruikersdata op
-    if ( token ) {
-      const decoded = jwtDecode( token );
-      void fetchUserData( decoded.sub, token );
+    if (token && isTokenValid(token)) {
+      void login(token);
     } else {
-      // als er GEEN token is doen we niks, en zetten we de status op 'done'
-      toggleIsAuth( {
+      toggleIsAuth({
         isAuth: false,
         user: null,
-        status: 'done',
-      } );
+        status: "done",
+      });
     }
-  }, [] );
+  }, []);
 
-  function login( JWT ) {
-    // zet de token in de Local Storage
-    localStorage.setItem( 'token', JWT );
-    // decode de token zodat we de ID van de gebruiker hebben en data kunnen ophalen voor de context
-    const decoded = jwt_decode( JWT );
+  async function login(token) {
+    localStorage.setItem("token", token);
+    const decodedToken = jwtDecode(token);
 
-    // geef de ID, token en redirect-link mee aan de fetchUserData functie (staat hieronder)
-    void fetchUserData( decoded.sub, JWT, '/profiel' );
-    // link de gebruiker door naar de profielpagina
-    navigate('/profiel');
+    if (decodedToken) {
+      localStorage.setItem('token', token);
+
+
+      try {
+        const response = await axios.get("https://frontend-educational-backend.herokuapp.com/api/user", {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              }
+            }
+        );
+
+        toggleIsAuth({
+          ...isAuth,
+          isAuthenticated: true,
+          user: {
+            username: response.data.username,
+            email: response.data.email,
+          },
+          status: 'done',
+        });
+        navigate('/profile');
+      } catch (e) {
+        console.error(e);
+        toggleIsAuth({
+          isAuthenticated: false,
+          user: null,
+          status: 'done',
+        })
+      }
+    } else {
+      console.error("Ongeldig of verlopen token");
+      toggleIsAuth({
+        isAuthenticated: false,
+        user: null,
+        status: "done",
+      })
+    }
   }
-
   function logout() {
     localStorage.clear();
     toggleIsAuth( {
@@ -55,56 +84,15 @@ function AuthContextProvider( { children } ) {
     console.log( 'Gebruiker is uitgelogd!' );
     navigate( '/' );
   }
-
-  // Omdat we deze functie in login- en het mounting-effect gebruiken, staat hij hier gedeclareerd!
-  async function fetchUserData( id, token, redirectUrl ) {
-    try {
-      // haal gebruikersdata op met de token en id van de gebruiker
-      const result = await axios.get( `https://frontend-educational-backend.herokuapp.com/api/user/`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${ token }`,
-        },
-      } );
-
-
-      toggleIsAuth( {
-        ...isAuth,
-        isAuth: true,
-        user: {
-          username: result.data.username,
-          email: result.data.email,
-          id: result.data.id,
-        //   data was eerst result
-        },
-        status: 'done',
-      } );
-
-      // als er een redirect URL is meegegeven (bij het mount-effect doen we dit niet) linken we hiernnaartoe door
-
-      if ( redirectUrl ) {
-        navigate( redirectUrl );
-      }
-
-    } catch ( e ) {
-      console.error( e );
-      // ging er iets mis? Plaatsen we geen data in de state
-      toggleIsAuth( {
-        isAuth: false,
-        user: null,
-        status: 'done',
-      } );
-    }
-  }
-
-  const contextData = {
+  const data = {
     ...isAuth,
-    login,
-    logout
+    login: login,
+    logout: logout,
+    navigate: navigate,
   };
 
   return (
-      <AuthContext.Provider value={ contextData }>
+      <AuthContext.Provider value={ data }>
         { isAuth.status === 'done' ? children : <p>Loading...</p> }
       </AuthContext.Provider>
   );

@@ -9,7 +9,7 @@ import "./Register.css"
 
 function Register() {
     // hookform voor het formulier
-   const {handleSubmit, register}=useForm()
+   const {handleSubmit, register,formState: { errors } }=useForm()
 
     // state voor functionaliteit
     const [error, toggleError] = useState(false);

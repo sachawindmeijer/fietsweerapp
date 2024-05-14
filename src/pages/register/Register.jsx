@@ -32,14 +32,14 @@ function Register() {
         toggleLoading(true);
 
         try {
-            await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", {
+            const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", {
                 email: data.email,
                 username: data.username,
                 password: data.password
             // }, {
             //     cancelToken: source.token,
             });
-
+console.log("register response", response)
             // als alles goed gegaan is, linken we door naar de login-pagina
             navigate('/login');
         } catch (e) {
@@ -121,7 +121,7 @@ function Register() {
                         {error && <p className="error">Dit account bestaat al. Probeer een ander emailadres.</p>}
                         <button
                             type="submit"
-                            className="button"
+                            className="rbutton"
                             disabled={loading}
                         >
                             Registreren

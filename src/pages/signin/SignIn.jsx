@@ -1,4 +1,4 @@
-import {useContext, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {AuthContext} from "../../context/AuthContext";
 import {useForm} from 'react-hook-form'
@@ -9,26 +9,29 @@ import "./SignIn.css"
 import InputField from "../../components/inputField/InputField.jsx";
 
 
-
 function SignIn() {
-    const { handleSubmit, register } = useForm();
+    const {handleSubmit, register} = useForm();
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
     const navigate = useNavigate();
     const {login} = useContext(AuthContext);
 
-
-
+    useEffect(() => {
+        console.log("register", register)
+    }, [register]);
     async function onSubmit(data) {
+        // e.response();
         toggleError(false);
+        console.log('onsubmit dubble data:',data)
 
         try {
             const result = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signin", {
-                    email: data.email,
+                    username: data.username,
                     password: data.password,
                 }
             );
             console.log(result.data);
+
             login(result.data.accessToken);
 
         } catch (e) {
@@ -50,14 +53,14 @@ function SignIn() {
                     <p>Vul het formulier in om in te loggen</p>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="form">
-                        <label htmlFor="email-field" className="input-container">
-                            Emailadres:
-                            <InputField
-                                type="email"
-                                id="email-field"
-                                register={register}
-                                placeholder="E-mail adress"
-                                validate={(value) => value.includes('@')}
+                        <label htmlFor="username-field" className="input-container">
+                            Gebruikersnaam:
+                            <input
+                                type="text"
+                                {...register("username")
+
+                                }
+                            />
 
                                 className="signin-input-field"
                             />
@@ -65,13 +68,11 @@ function SignIn() {
 
                         <label htmlFor="password-field" className="input-container">
                             Wachtwoord:
-                            <InputField
-                                type="password"
-                                id="password-field"
-                                register={register}
-                                placeholder="wachtwoord"
-                                className="signin-input-field"
+                            <input
+                                type="text"
+                                {...register("password")
 
+                                }
                             />
                         </label>
                         {error && <p className="error">Combinatie van emailadres en wachtwoord is onjuist</p>}

@@ -16,10 +16,11 @@ function AuthContextProvider({children}) {
 
     // MOUNTING EFFECT
     useEffect(() => {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem('token');
 
         if (token && isTokenValid(token)) {
-            void fetchUserData(token);
+            const decoded = jwtDecode( token );
+            void fetchUserData( decoded.sub, token, '/profile');
         } else {
             toggleIsAuth({
                 isAuth: false,
@@ -29,25 +30,26 @@ function AuthContextProvider({children}) {
         }
     }, []);
 
-    function login(token) {
-        localStorage.setItem('token', token)
-        const decoded = jwtDecode;
-        void fetchUserData(decoded.sub, token, '/profiel')
+    function login(JWT) {
+        localStorage.setItem('token', JWT)
+        const decoded= jwtDecode (JWT);
+        void fetchUserData( decoded.sub, JWT, '/profile' );
     }
 
-    async function fetchUserData(token) {
+    async function fetchUserData(id, token, redirectUrl) {
         localStorage.setItem("token", token);
-        // const decodedToken = isTokenValid(token);
+        // const decoded = isTokenValid(token);
 
 
             try {
-                const data = await axios.get("https://frontend-educational-backend.herokuapp.com/api/user", {
+                const data = await axios.get(`https://frontend-educational-backend.herokuapp.com/api/user/${ id }`, {
                     headers: {
                         "Content-Type": "application/json",
                         Authorization: `Bearer ${token}`,
                     }
                     })
                 toggleIsAuth({
+                   ...isAuth,
                     isAuth: true,
                     user: {
                         username: data.data.username,
@@ -56,7 +58,9 @@ function AuthContextProvider({children}) {
                     },
                     status: 'done',
                 });
-                navigate('/profile');
+                if ( redirectUrl ) {
+                    navigate( redirectUrl );
+                }
 
             } catch (e) {
                 console.error(e);

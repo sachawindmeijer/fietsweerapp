@@ -161,7 +161,7 @@ nav a:active {
 /*}*/
 
 .error {
-  color: #ea7e1f;
+  color: rgba(234, 126, 31, 0.8);
 }
 
 /*Zet mij op een element en ik blijf voor altijd draaien!*/

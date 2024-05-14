@@ -40,5 +40,10 @@
     text-align: center;
 }
 
-/*.button {*/
-/*    padding: 3px}*/
+.rbutton {
+    padding: 9px;
+    margin: 71px;
+    color: orange;
+    border: solid 2px black;
+
+}

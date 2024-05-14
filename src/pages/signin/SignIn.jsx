@@ -6,11 +6,11 @@ import axios from 'axios';
 import HeaderWeather from "../../components/header/headerWeather.jsx";
 import NavBar from "../../components/navbar/NavBar.jsx";
 import "./SignIn.css"
-import InputField from "../../components/inputField/InputField.jsx";
+// import InputField from "../../components/inputField/InputField.jsx";
 
 
 function SignIn() {
-    const {handleSubmit, register} = useForm();
+    const {register,handleSubmit,formState:{errors}} = useForm();
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
     const navigate = useNavigate();
@@ -19,8 +19,9 @@ function SignIn() {
     useEffect(() => {
         console.log("register", register)
     }, [register]);
+
     async function onSubmit(data) {
-        // e.response();
+        // e.preventDefault();
         toggleError(false);
         console.log('onsubmit dubble data:',data)
 
@@ -40,10 +41,9 @@ function SignIn() {
         } finally {
             toggleLoading(false);
             navigate('/profiel')
-
         }
     }
-
+console.log("ERRORS", errors)
     return (
         <div className="background">
             <HeaderWeather/>
@@ -57,23 +57,32 @@ function SignIn() {
                             Gebruikersnaam:
                             <input
                                 type="text"
-                                {...register("username")
-
+                                id="username-field"
+                                {...register("username",{
+                                    required: {
+                                    value: true,
+                                    message: 'leeg'
                                 }
+                                })}
                             />
+                            {errors.username && <p> dit veld is leeg</p>}
 
-                                className="signin-input-field"
-                            />
+
                         </label>
 
                         <label htmlFor="password-field" className="input-container">
                             Wachtwoord:
                             <input
                                 type="text"
-                                {...register("password")
-
+                                id="password-field"
+                                {...register("password", {
+                                    required: {
+                                        value: true,
+                                        message: 'het is leeg'
                                 }
+                                })}
                             />
+                            {errors.password && <p> dit veld is leeg</p>}
                         </label>
                         {error && <p className="error">Combinatie van emailadres en wachtwoord is onjuist</p>}
 

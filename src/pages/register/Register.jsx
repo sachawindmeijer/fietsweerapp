@@ -47,9 +47,6 @@ console.log("register response", response)
             toggleError(true);
         }
             toggleLoading(false);
-
-
-
     }
 
     return (

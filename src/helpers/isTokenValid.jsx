@@ -1,4 +1,4 @@
-import  jwtDecode  from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 function isTokenValid(token) {
     try {
@@ -7,7 +7,7 @@ function isTokenValid(token) {
 
         // Decode the token and handle potential errors
         const decodedToken = jwtDecode(token);
-
+        console.log("jwtdecode", decodedToken)
         // Ensure the decoded token has an 'exp' (expiration time) claim
         if (!decodedToken.exp) {
             console.error("Token mist claim voor vervaltijd .");

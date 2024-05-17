@@ -23,7 +23,7 @@ function SignIn() {
     async function onSubmit(data) {
         // e.preventDefault();
         toggleError(false);
-        console.log('onsubmit dubble data:',data)
+        console.log('onsubmit data:',data)
 
         try {
             const result = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signin", {
@@ -31,9 +31,8 @@ function SignIn() {
                     password: data.password,
                 }
             );
-            console.log(result.data);
-
-            login(result.data.accessToken);
+                       login(result.data.accessToken);
+                       console.log("token on submit", result.data.accessToken)
 
         } catch (e) {
             console.error(e);
@@ -43,7 +42,8 @@ function SignIn() {
             navigate('/profiel')
         }
     }
-console.log("ERRORS", errors)
+
+    // console.log("ERRORS", errors)
     return (
         <div className="background">
             <HeaderWeather/>
@@ -60,9 +60,9 @@ console.log("ERRORS", errors)
                                 id="username-field"
                                 {...register("username",{
                                     required: {
-                                    value: true,
-                                    message: 'leeg'
-                                }
+                                        value: true,
+                                        message: 'leeg'
+                                    }
                                 })}
                             />
                             {errors.username && <p> dit veld is leeg</p>}
@@ -79,7 +79,7 @@ console.log("ERRORS", errors)
                                     required: {
                                         value: true,
                                         message: 'het is leeg'
-                                }
+                                    }
                                 })}
                             />
                             {errors.password && <p> dit veld is leeg</p>}

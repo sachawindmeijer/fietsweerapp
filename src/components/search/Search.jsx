@@ -12,7 +12,9 @@ function SearchBar({setLocationHandler}) {
     function keyPressCheck(e) {
         if (e.keyCode === 13) {
             setLocationHandler(query);
+
         }
+        console.log('zoeken', query)
     }
 
     return (
@@ -23,7 +25,7 @@ function SearchBar({setLocationHandler}) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyUp={keyPressCheck}
-          placeholder="Zoek een locatie"
+          placeholder="Zoek een locatie in Nederland"
           className="searchbar-entry"
       />
 

@@ -68,6 +68,10 @@ p {
 
 }
 
+.locationdetails p{
+    color: #2a5fff;
+}
+
 
 @media (max-width: 768px) {
     .outer-container {

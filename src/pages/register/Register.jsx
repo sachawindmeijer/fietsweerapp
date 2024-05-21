@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form'
 import axios from 'axios';
@@ -9,17 +9,24 @@ import "./Register.css"
 
 function Register() {
     // hookform voor het formulier
-   const {handleSubmit, register,formState: { errors } }=useForm()
+    const {
+        handleSubmit,
+        formState: {errors},
+        register
+    } = useForm({
+        criteriaMode: "all"
+    });
 
     // state voor functionaliteit
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
-
     const navigate = useNavigate();
+
+    // we maken een canceltoken aan voor ons netwerk-request
     // const source = axios.CancelToken.source();
-    //
-    //
+
+    // mocht onze pagina ge-unmount worden voor we klaar zijn met data ophalen, aborten we het request
     // useEffect(() => {
     //     return function cleanup() {
     //         source.cancel();
@@ -27,26 +34,27 @@ function Register() {
     // }, []);
 
     async function onSubmit(data) {
-        console.log(data);
+        console.log('SUBMITTED', data);
         toggleError(false);
         toggleLoading(true);
 
         try {
-            const response = await axios.post("https://frontend-educational-backend.herokuapp.com/api/auth/signup", {
+            const response = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup', {
                 email: data.email,
                 username: data.username,
-                password: data.password
-            // }, {
-            //     cancelToken: source.token,
+                password: data.password,
+                role: ["user"]
             });
-console.log("register response", response)
+
+            console.log('response', response)
             // als alles goed gegaan is, linken we door naar de login-pagina
             navigate('/login');
         } catch (e) {
             console.error(e);
             toggleError(true);
         }
-            toggleLoading(false);
+
+        toggleLoading(false);
     }
 
     return (
@@ -118,7 +126,7 @@ console.log("register response", response)
                         {error && <p className="error">Dit account bestaat al. Probeer een ander emailadres.</p>}
                         <button
                             type="submit"
-                            className="rbutton"
+                            className="button"
                             disabled={loading}
                         >
                             Registreren

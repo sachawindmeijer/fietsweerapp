@@ -17,7 +17,9 @@ function SavedCitiesList() {
             setError(false)
             try {
                 const cityListWeather = await Promise.all(cityList.map(city => {
-                    return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city.location}&appid=${import.meta.env.REACT_APP_API_KEY}&lang=nl`)
+                    return axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city.location},nl&appid=${import.meta.env.REACT_APP_API_KEY}&lang=nl`)
+
+                    console.log('stadsweer',cityListWeather.data);
                 }))
                 const filteredArr = cityListWeather.map((data) => {
                     return {

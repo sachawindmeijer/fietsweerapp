@@ -1,4 +1,3 @@
-//home.jsx
 import React, {useEffect, useState, useContext} from "react";
 import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
@@ -26,12 +25,14 @@ function Home() {
             setError(false);
             toggleLoading(true);
             try {
-                const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${import.meta.env.VITE_API_KEY}&lang=nl`);
+                const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${import.meta.env.VITE_API_KEY}&lang=nl`);
+
                 setWeatherData(result.data);
-                console.log("home" + result.data)
+                console.log("home" , result.data)
             } catch (e) {
                 console.error(e);
                 setError(true);
+
             }
             toggleLoading(false);
         }
@@ -68,10 +69,10 @@ function Home() {
                             <Search setLocationHandler={setLocation}/>
                             {error &&
                                 (<span className="wrong-location-error">
-                            Oeps! Deze locatie bestaat niet. Kijk de spelling na.
+                           De locatie bestaat niet in nederland. Kijk de spelling na.
                         </span>)}
 
-                            <span className="location-details">
+                            <span className="locationdetails">
                         {loading && (<span>Loading...</span>)}
 
                                 {weatherData && <article>

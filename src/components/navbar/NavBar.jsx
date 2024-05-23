@@ -1,11 +1,12 @@
 import React, {useContext} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext";
+import Button from "../button/Button.jsx";
 
 
 function NavBar() {
     const {isAuth, logout} = useContext(AuthContext)
-   // const {loggedIn, logout} = useContext(AuthContext)
+    // const {loggedIn, logout} = useContext(AuthContext)
     const navigate = useNavigate();
 
     return (
@@ -16,32 +17,29 @@ function NavBar() {
             </Link>
 
             {isAuth ?
-                <button
+                <Button
+                    //className=''
                     type="button"
                     onClick={logout}
-                >
-                    Log uit
-                </button>
+                    text='logout'
+                />
                 :
                 <div>
-                    <button
+                    <Button
                         type="button"
                         onClick={() => navigate('/login')}
-                    >
-                        Log in
-                    </button>
-                    <button
+                        text='login'
+                    />
+                    <Button
                         type="button"
                         onClick={() => navigate('/registreren')}
-                    >
-                        Registreren
-                    </button>
-                    <button
+                        text='Registreren'
+                    />
+                    <Button
                         type="button"
                         onClick={() => navigate('/')}
-                    >
-                        Home
-                    </button>
+                        text='Home'
+                    />
                 </div>
             }
         </nav>

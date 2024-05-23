@@ -6,6 +6,9 @@ import axios from 'axios';
 import HeaderWeather from "../../components/header/headerWeather.jsx";
 import NavBar from "../../components/navbar/NavBar.jsx";
 import "./SignIn.css"
+import InlogField from "../../components/inputField/InlogField.jsx";
+import Button from "../../components/button/Button.jsx";
+
 
 function SignIn() {
     const {handleSubmit, register} = useForm();
@@ -42,6 +45,7 @@ function SignIn() {
 
         } catch (e) {
             console.error(e);
+            console.log(e);
             toggleError(true);
         }
     }
@@ -57,37 +61,38 @@ function SignIn() {
                     <form onSubmit={handleSubmit(onSubmit)} className="form">
                         <label htmlFor="email-field" className="input-container">
                             Gebruikersnaam:
-                            <input
+                            <InlogField
                                 type="text"
                                 id="username-field"
-                                {...register("username")}
+                                register={register}
                                 placeholder="Je gebruikersnaam"
-                                className="signin-input-field"
+                                // className="signin-input-field"
                             />
                         </label>
 
                         <label htmlFor="password-field" className="input-container">
                             Wachtwoord:
-                            <input
+                            <InlogField
                                 type="password"
                                 id="password-field"
-                                {...register("password")}
+                                register={register}
                                 placeholder="Je wachtwoord"
-                                className="signin-input-field"
+
+                                // className="signin-input-field"
                             />
                         </label>
                         {error && <p className="error">Combinatie van emailadres en wachtwoord is onjuist</p>}
 
-                        <button
-                            type="submit"
+                        <Button
                             className="form-button"
-                        >
-                            Inloggen
-                        </button>
+                            type="submit"
+                            text='Inloggen'
+                        />
                     </form>
 
                 </section>
-                <p className="out-text">Heb je nog geen account? <Link to="/registreren">Registreer</Link> je dan eerst.</p>
+                <p className="out-text">Heb je nog geen account? <Link to="/registreren">Registreer</Link> je dan eerst.
+                </p>
             </div>
         </div>
     )

@@ -6,6 +6,7 @@ import HeaderWeather from "../../components/header/headerWeather.jsx";
 import NavBar from "../../components/navbar/NavBar.jsx";
 import {ErrorMessage} from "@hookform/error-message";
 import "./Register.css"
+import Button from "../../components/button/Button.jsx";
 
 function Register() {
     // hookform voor het formulier
@@ -124,13 +125,12 @@ function Register() {
                             />
                         </label>
                         {error && <p className="error">Dit account bestaat al. Probeer een ander emailadres.</p>}
-                        <button
-                            type="submit"
+                        <Button
                             className="button"
+                            type="submit"
                             disabled={loading}
-                        >
-                            Registreren
-                        </button>
+                           text='Registreren'
+                        />
 
                     </form>
                 </section>

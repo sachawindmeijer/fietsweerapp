@@ -1,15 +1,15 @@
-function InputField({type, id, register, placeholder, value, onChange}) {
+function InlogField({type, id, register, placeholder}) {
     return (
         <input
             type={type}
             id={id}
             {...register(id)}
             placeholder={placeholder}
-            value={value}
-            onChange={onChange}
+
+
         />
     )
 }
 
 
-export default InputField;
+export default InlogField;

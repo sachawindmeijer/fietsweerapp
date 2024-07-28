@@ -11,7 +11,7 @@
 ## Introductie
 Deze applicatie toont het huidige weer en de weersvoorspelling voor de huidige dag. Gebruikers kunnen inloggen om hun favoriete locaties op te slaan en gepersonaliseerde weersvoorspellingen te ontvangen.
 
-![Home](src/assets/home.png)
+![Homeweb](src/assets/home.png)
 
 <a name="benodigdheden"></a>
 ## Benodigdheden

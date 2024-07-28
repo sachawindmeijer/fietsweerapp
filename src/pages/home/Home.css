@@ -5,8 +5,7 @@
 .outer-container {
     display: flex;
     justify-content: center;
-    flex-direction: row;
-
+    align-items: stretch;
     flex-wrap: wrap;
 }
 
@@ -15,17 +14,24 @@
     flex-wrap: wrap;
     padding: 0;
     margin: 0;
-    justify-content: center;
-    /*border: solid 2px darkred;*/
+    justify-content: space-between;
+    flex: 1;
 }
 
 .saved-cities-list-container, .saved-cities-logout-container {
+    width: 50%;
+    background: #2a5fff;
+    color: white;
+}
+
+.saved-cities-list-container, .saved-cities-logout-container, .image-and-search-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     min-width: 400px;
     padding: 5px;
-    background: #2a5fff;
     border-radius: 5px;
-    margin-right: 20px;
-    /*border: solid 2px black;*/
 }
 
 .saved-cities-logout-message, .weather-error {
@@ -34,42 +40,55 @@
     width: 50%;
     padding: 5px;
     min-width: 290px;
-
     justify-content: space-between;
 }
 
-.image-and-search-container {
-    /*padding: 5px;*/
-    /*background: #2a5fff;*/
-    border-radius: 5px;
-    /*margin: 5px;*/
-    /*border: solid 2px black;*/
+.image-container img {
+    width: 100%;
+    height: auto;
+}
 
+.search-city {
+    display: flex;
+    max-width: 500px;
+    object-fit: contain;
+    justify-content: center;
+    padding-bottom: 20px;
+    flex-direction: column;
+}
+
+.image-and-search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .image-container {
     display: flex;
-    max-width: 500px;
-    object-fit: contain; /* Behoud de beeldverhouding van de afbeelding */
     justify-content: center;
-    padding-bottom: 20px;
-    /*border: solid 2px black;*/
+    margin-bottom: 10px;
 }
 
-.image-container img {
-    max-width: 100%;
-    object-fit: contain;
-    border-radius: 5px 5px 0 0;
-
+.weather-search-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-p {
-    color: white;
-
+.locationdetails {
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
 }
 
-.locationdetails p{
+.locationdetails p {
     color: #2a5fff;
+    margin: 5px 0;
+    text-align: left;
+
 }
 
 

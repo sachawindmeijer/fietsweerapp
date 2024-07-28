@@ -21,6 +21,7 @@ function SaveCities() {
                 id: uniqueId,
                 location: city,
             };
+            console.log("Adding new city:", newCity)
             setCitiesList([newCity, ...citiesList]);
             setCity('')
         } else {
@@ -30,11 +31,13 @@ function SaveCities() {
     }
     const deleteCity = (id) => {
         let newCityList = citiesList.filter((city) => city.id !== id);
+        console.log("Removing city:", id); // Log removed city ID
         setCitiesList([...newCityList])
     }
 
     useEffect(() => {
         localStorage.setItem('cities', JSON.stringify(citiesList));
+        console.log("Cities saved to local storage"); // Log local storage update
     }, [citiesList])
 
     return (

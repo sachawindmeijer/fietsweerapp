@@ -12,7 +12,6 @@ Deze applicatie toont het huidige weer en de weersvoorspelling voor de huidige d
 
 ![home](src/assets/home.png)
 
-
 <a name="benodigdheden"></a>
 ## Benodigdheden
 

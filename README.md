@@ -9,7 +9,7 @@
 <a name="introductie"></a>
 ## Introductie
 Deze applicatie toont het huidige weer en de weersvoorspelling voor de huidige dag. Gebruikers kunnen inloggen om hun favoriete locaties op te slaan en gepersonaliseerde weersvoorspellingen te ontvangen.
-![Fietsweerapp](src/assets/Fietsweerapp.png)
+![home](src/assets/home.png)
 
 
 <a name="benodigdheden"></a>

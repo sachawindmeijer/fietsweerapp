@@ -10,7 +10,7 @@ function Preferences() {
         defaultValues: {
             temperature: preferencesList.preferredWeather.temperature,
             cloudiness: preferencesList.preferredWeather.cloudiness,
-            windspeed: preferencesList.preferredWeather.windspeed, pr
+            windspeed: preferencesList.preferredWeather.windspeed,
         }
     })
     // Deze functie observeert veranderingen in de waardes van de geregistreerde formulier

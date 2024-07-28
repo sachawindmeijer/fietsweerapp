@@ -54,7 +54,7 @@ function Register() {
                     <HeaderWeather/>
                     <NavBar/>
                     <div className="outer-container">
-                        <section className="form-container">
+                        <section className="form-wrapper">
                             <p>Het het formulier in om je te kunnen aanmelden</p>
                             <form onSubmit={handleSubmit(onSubmit)} className="form">
                                 <label htmlFor="username-field" className="input-container">
@@ -118,7 +118,7 @@ function Register() {
                                 {error &&
                                     <p className="error">Dit account bestaat al. Probeer een ander emailadres.</p>}
                                 <Button
-                                    className="button"
+                                    className="buttonr"
                                     type="submit"
                                     disabled={loading}
                                     text='Registreren'

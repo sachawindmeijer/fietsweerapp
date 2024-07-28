@@ -1,4 +1,4 @@
-import {useContext, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {AuthContext} from "../../context/AuthContext";
 import {useForm} from 'react-hook-form';
@@ -48,7 +48,7 @@ function SignIn() {
                     <div className="outer-container">
                         <section className="form-wrapper">
                             <p className="form-header">Vul het formulier in om in te loggen</p>
-                            <div className="form-container">
+                            {/*<div className="form-container">*/}
                                 <form onSubmit={handleSubmit(onSubmit)} className="form">
                                     <label htmlFor="username-field" className="input-container">
                                         Gebruikersnaam:
@@ -78,7 +78,7 @@ function SignIn() {
                                         text='Inloggen'
                                     />
                                 </form>
-                            </div>
+                            {/*</div>*/}
                         </section>
                         <p className="out-text">Heb je nog geen account? <Link to="/registreren">Registreer</Link> je
                             dan eerst.</p>

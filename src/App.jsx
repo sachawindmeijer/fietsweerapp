@@ -12,7 +12,6 @@ function App() {
 
     return (
         <div className="app">
-            {/*<div className="content">*/}
                 <Routes>
 
                     <Route path="/" className="nav-button" element={<Home/>}/>
@@ -22,8 +21,6 @@ function App() {
                     <Route path="/loguit" className="nav-button" element={<SignOut/>}/>
 
                 </Routes>
-            {/*</div>*/}
-            {/*<Footer/>*/}
 
         </div>
     );

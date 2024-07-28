@@ -9,7 +9,8 @@
 <a name="introductie"></a>
 ## Introductie
 Deze applicatie toont het huidige weer en de weersvoorspelling voor de huidige dag. Gebruikers kunnen inloggen om hun favoriete locaties op te slaan en gepersonaliseerde weersvoorspellingen te ontvangen.
-![Home](C:\Users\User\Documents\les 3\eindopdracht\Eindopdracht\home.png)
+
+![home](src/assets/home.png)
 
 
 <a name="benodigdheden"></a>

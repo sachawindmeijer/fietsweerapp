@@ -7,6 +7,7 @@
 4. [Extra toelichting](#extra-toelichting)
 
 <a name="introductie"></a>
+
 ## Introductie
 Deze applicatie toont het huidige weer en de weersvoorspelling voor de huidige dag. Gebruikers kunnen inloggen om hun favoriete locaties op te slaan en gepersonaliseerde weersvoorspellingen te ontvangen.
 
@@ -14,7 +15,6 @@ Deze applicatie toont het huidige weer en de weersvoorspelling voor de huidige d
 
 <a name="benodigdheden"></a>
 ## Benodigdheden
-
 
 1) Voor dit project heb ik een API key van OpenWeatherMap.org (https://openweathermap.org/api) gebruikt. De benodigde API key voor beoordelaars kan worden gevonden in het functioneel ontwerp van dit project aan het einde van het document.
 2) Node.js: Zorg ervoor dat je Node.js hebt geïnstalleerd.

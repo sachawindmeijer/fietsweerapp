@@ -18,7 +18,7 @@ function SignIn() {
     const {login} = useContext(AuthContext);
 
     async function onSubmit(data) {
-        console.log("BANAAN", data)
+        console.log("signin", data)
         toggleError(false);
 
         try {

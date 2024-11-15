@@ -13,8 +13,7 @@ function Preferences() {
             windspeed: preferencesList.preferredWeather.windspeed,
         }
     })
-    // Deze functie observeert veranderingen in de waardes van de geregistreerde formulier
-    // elementen en retourneert de actuele waarde.
+
     const watchCloudiness = watch("cloudiness")
     const watchWindspeed = watch("windspeed")
 
@@ -32,9 +31,7 @@ function Preferences() {
 
         }
     };
-    // useEffect(() => {
-    //     localStorage.setItem('preferences', JSON.stringify(preferencesList))
-    // }, [preferencesList])
+
     return (
         <main>
             <form onSubmit={handleSubmit(onSubmit)}>

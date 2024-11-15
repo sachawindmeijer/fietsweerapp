@@ -3,10 +3,6 @@ import {CityContext} from "../../context/CityContext";
 import "./SaveCities.css"
 import Button from "../button/Button.jsx";
 
-// Deze code zorgt voor het opslaan en beheren van steden in een React applicatie.
-//     Gebruikers kunnen steden toevoegen en verwijderen uit een lijst met maximaal 5 items.
-//     De lijst wordt automatisch opgeslagen in de local storage
-
 function SaveCities() {
     const [citiesList, setCitiesList] = useContext(CityContext)
     const [city, setCity] = useState('')

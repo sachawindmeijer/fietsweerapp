@@ -15,7 +15,7 @@ function SavedCitiesList() {
             setError(null); // Reset error on each effect run
 
             try {
-                const apiKey = import.meta.env.VITE_API_KEY ; // Of VITE_API_KEY afhankelijk van je setup
+                const apiKey = import.meta.env.VITE_APP_WEAR_API_KEY ;
                 if (!apiKey) {
                     console.error("API-key ontbreekt. Controleer je .env-bestand.");
                     setError(true);

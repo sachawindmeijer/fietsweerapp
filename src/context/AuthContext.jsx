@@ -52,12 +52,14 @@ function AuthContextProvider({children}) {
         navigate('/');
     }
 
+//import.meta.env.VITE_API_KEY
+    const apiKey = import.meta.env.VITE_APP_DATA_API_KEY;
     async function fetchUserData(id, token, redirectUrl) {
         try {
             const response = await axios.get(`https://api.datavortex.nl/fietsweerapp/users/${id}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Api-Key': 'fietsweerapp:hBH5OAPQhRKCdFlifgTZ',// Replace with process.env.API_KEY in production
+                    'X-Api-Key': `fietsweerapp:${apiKey}`,// Replace with process.env.API_KEY in production
                     'Authorization': `Bearer ${token}`
                 }
             });

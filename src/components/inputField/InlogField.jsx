@@ -3,9 +3,8 @@ function InlogField({type, id, register, placeholder}) {
         <input
             type={type}
             id={id}
-            {...register(id)}
             placeholder={placeholder}
-
+            {...register}
 
         />
     )

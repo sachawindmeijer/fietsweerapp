@@ -22,19 +22,27 @@ function SignIn() {
         toggleError(false);
 
         try {
-            const result = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signin', {
+            const result = await axios.post('https://api.datavortex.nl/fietsweerapp/users/authenticate', {
                 username: data.username,
                 password: data.password
-            });
+            },{
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Api-Key': 'fietsweerapp:hBH5OAPQhRKCdFlifgTZ'
+                }
+            });// het zegt username onbekent kijk even naar de backend beschrijving
 
-            console.log("api Response", result.data);
+            console.log("API Response:", result.data);
 
-            // geef de JWT token aan de login-functie van de context mee
+            // Pass the JWT token to the login function in the context
             login(result.data.accessToken);
 
         } catch (e) {
-            console.error(e);
-            console.log("Error Response:", e.response ? e.response.data : e.message)
+            console.error("Error:", e);
+            console.log("Error Response:", e.response ? e.response.data : e.message);
+            if (e.response && e.response.data) {
+                console.log("Error details:", e.response.data); // Log any specific error messages
+            }
             toggleError(true);
         }
     }
@@ -55,8 +63,8 @@ function SignIn() {
                                         <InlogField
                                             type="text"
                                             id="username-field"
-                                            register={register}
-                                            placeholder="Je gebruikersnaam"
+                                            register={register("username", { required: true })}
+                                        placeholder="Je gebruikersnaam"
                                         />
                                     </label>
 
@@ -65,7 +73,7 @@ function SignIn() {
                                         <InlogField
                                             type="password"
                                             id="password-field"
-                                            register={register}
+                                            register={register("password", { required: true })} // Bind 'password'
                                             placeholder="Je wachtwoord"
                                         />
                                     </label>

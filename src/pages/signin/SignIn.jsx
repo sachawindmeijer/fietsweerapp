@@ -9,6 +9,7 @@ import "./SignIn.css";
 import InlogField from "../../components/inputField/InlogField.jsx";
 import Button from "../../components/button/Button.jsx";
 import Footer from "../../components/footer/Footer.jsx";
+import isTokenValid from "../../helpers/isTokenValid.jsx";
 
 
 function SignIn() {
@@ -34,8 +35,17 @@ function SignIn() {
 
             console.log("API Response:", result.data);
 
-            // Pass the JWT token to the login function in the context
-            login(result.data.accessToken);
+            const token = result.data.jwt;
+            console.log("Received Token:", token);
+
+            // Controleer of de token geldig is
+            if (isTokenValid(token)) {
+                console.log("Token is valid!");
+                login(token); // Log de gebruiker in
+            } else {
+                console.error("Token is invalid or expired.");
+                toggleError(true);
+            }
 
         } catch (e) {
             console.error("Error:", e);

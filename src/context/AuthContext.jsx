@@ -57,8 +57,8 @@ function AuthContextProvider({children}) {
             const response = await axios.get(`https://api.datavortex.nl/fietsweerapp/users/${id}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Api-Key': 'fietsweerapp:hBH5OAPQhRKCdFlifgTZ',
-                    'Authorization': `Bearer ${token}`// Replace with process.env.API_KEY in production
+                    'X-Api-Key': 'fietsweerapp:hBH5OAPQhRKCdFlifgTZ',// Replace with process.env.API_KEY in production
+                    'Authorization': `Bearer ${token}`
                 }
             });
 

@@ -15,9 +15,15 @@ function SavedCitiesList() {
             setError(null); // Reset error on each effect run
 
             try {
+                const apiKey = import.meta.env.VITE_API_KEY ; // Of VITE_API_KEY afhankelijk van je setup
+                if (!apiKey) {
+                    console.error("API-key ontbreekt. Controleer je .env-bestand.");
+                    setError(true);
+                    return;
+                }
                 const cityWeatherPromises = cityList.map((city) =>
                     axios.get(
-                        `https://api.openweathermap.org/data/2.5/weather?q=${city.location},nl&appid=${import.meta.env.VITE_REACT_APP_API_KEY}&lang=nl`
+                        `https://api.openweathermap.org/data/2.5/weather?q=${city.location},nl&appid=${apiKey}&lang=nl`
                     )
                 );console.log("cityWeatherPromises:", cityWeatherPromises);
 

@@ -44,12 +44,13 @@ function AuthContextProvider({children}) {
 
     function logout() {
         localStorage.clear();
+        console.log('Local storage after clear:', localStorage); // Debugging
         toggleIsAuth({
             isAuth: false,
             user: null,
             status: 'done',
         });
-        navigate('/');
+        navigate('/loguit');
     }
 
 //import.meta.env.VITE_API_KEY

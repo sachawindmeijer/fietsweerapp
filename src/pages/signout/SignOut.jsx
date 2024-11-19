@@ -22,7 +22,7 @@ function SignOut() {
                     <Button
                         className="page-button"
                         type="button"
-                        onClick={() => navigate('/signin')}
+                        onClick={() => navigate('/login')}
                         text='Log In'
                     />
                     <p>Uit</p>

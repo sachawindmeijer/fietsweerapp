@@ -5,7 +5,7 @@ import "./NavBar.css"
 
 
 function NavBar() {
-    const {isAuth, SignOut} = useContext(AuthContext)
+    const {isAuth, logout} = useContext(AuthContext)
 
 
     return (
@@ -20,7 +20,11 @@ function NavBar() {
                             {isAuth ?
                                 <Link
                                     to="/loguit"
-                                    onClick={SignOut}
+                                    onClick={(e) => {
+                                        e.preventDefault(); // Voorkom standaard linkgedrag
+                                        logout(); // Context-logout aanroepen
+                                        console.log('Logout clicked');
+                                    }}
                                 >
                                     Log out
                                 </Link> : <Link

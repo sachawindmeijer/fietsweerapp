@@ -3,12 +3,15 @@ import axios from "axios";
 import { PreferencesContext } from "../../context/PreferencesContext";
 import { CityContext } from "../../context/CityContext.jsx";
 import WeatherCard from "../weatherCard/WeatherCard";
+import Button from "../button/Button.jsx";
+import {Link, useNavigate} from 'react-router-dom';
 
 function SavedCitiesList() {
     const [cityList] = useContext(CityContext);
     const [preferencesList] = useContext(PreferencesContext);
     const [cityListWeatherData, setCityListWeatherData] = useState([]);
     const [error, setError] = useState(null); // Use null for initial error state
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -65,7 +68,8 @@ function SavedCitiesList() {
             <span className="weather-error">
         <p>Er is iets mis gegaan met het ophalen van de gegevens. </p>
         <p>
-          Kijk nog eens locatienamen in jouw profiel na en wijzig ze desnoods en
+          Kijk nog eens locatienamen in jouw profiel na en <Link
+            to="/profiel">wijzig</Link> ze desnoods en
           probeer het nog eens.
         </p>
       </span>
@@ -93,6 +97,7 @@ function SavedCitiesList() {
 
     return (
         <section className="weatherCards">
+
             {cityListWeatherData.map((cityWeather) => (
                 <WeatherCard
                     key={cityWeather.name}
@@ -107,7 +112,15 @@ function SavedCitiesList() {
                     clouds={cityWeather.clouds.all}
                 />
             ))}
+
+            <Button
+                className="page-button"
+                type="button"
+                onClick={() => navigate('/profiel')}
+                text='wijzig'
+            />
         </section>
+
     );
 }
 

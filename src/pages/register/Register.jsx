@@ -129,7 +129,7 @@ function Register() {
                                 {error &&
                                     <p className="error">Dit account bestaat al. Probeer een ander emailadres.</p>}
                                 <Button
-                                    className="buttonr"
+                                    className="buttonR"
                                     type="submit"
                                     disabled={loading}
                                     text='Registreren'

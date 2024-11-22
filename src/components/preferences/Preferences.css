@@ -1,3 +1,9 @@
 .preferences-button {
-    padding: 1px;
+    width: auto;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Optioneel: voeg wat ruimte boven de button toe */
 }

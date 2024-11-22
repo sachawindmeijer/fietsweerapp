@@ -5,7 +5,7 @@ import Register from './pages/register/Register.jsx';
 import SignOut from "./pages/signout/SignOut.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import "./App.css"
-import Footer from "./components/footer/Footer.jsx";
+
 
 
 function App() {

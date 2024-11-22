@@ -24,11 +24,10 @@ function Profile() {
                                 <Preferences/>
                             </section>
                         </div>
-
                     </div>
                 </div>
             </main>
-        <Footer/>
+            <Footer/>
         </div>
     )
 }

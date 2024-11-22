@@ -15,17 +15,17 @@ function SignOut() {
             <div className="outer-container">
                 <div className="button-text-container">
                     <span className="button-text-container">
-                        <p>U bent uitgelogd.</p>
+                        <h1>U bent uitgelogd.</h1>
                         <p>Bedankt voor u bezoek en tot snel</p>
                     </span>
-                    <p>Iets mis?</p>
+                    <p>Iets mis? log dan opnieuw in</p>
                     <Button
                         className="page-button"
                         type="button"
                         onClick={() => navigate('/login')}
                         text='Log In'
                     />
-                    <p>Uit</p>
+                    <p>of liever naar de homepage</p>
                     <Button
                         className="page-button"
                         type="button"

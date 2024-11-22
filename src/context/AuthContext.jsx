@@ -53,7 +53,7 @@ function AuthContextProvider({children}) {
         navigate('/loguit');
     }
 
-//import.meta.env.VITE_API_KEY
+
     const apiKey = import.meta.env.VITE_APP_DATA_API_KEY;
     async function fetchUserData(id, token, redirectUrl) {
         try {

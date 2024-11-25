@@ -14,7 +14,7 @@ import isTokenValid from "../../helpers/isTokenValid.jsx";
 
 function SignIn() {
     const {handleSubmit, register} = useForm();
-
+    const apiKey = import.meta.env.DATA_API_KEY;
     const [error, toggleError] = useState(false);
     const {login} = useContext(AuthContext);
 
@@ -29,7 +29,7 @@ function SignIn() {
             },{
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Api-Key': 'fietsweerapp:hBH5OAPQhRKCdFlifgTZ'
+                    'X-Api-Key': apiKey
                 }
             });// het zegt username onbekent kijk even naar de backend beschrijving
 

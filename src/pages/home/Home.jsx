@@ -29,7 +29,7 @@ function Home() {
             setError(false);
             toggleLoading(true);
             try {
-                const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${import.meta.env.VITE_APP_WEAR_API_KEY}&lang=nl`);
+                const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${import.meta.env.VITE_WEER_API_KEY}&lang=nl`);
 
                 setWeatherData(result.data);
                 console.log("home", result.data)

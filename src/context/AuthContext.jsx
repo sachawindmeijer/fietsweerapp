@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export const AuthContext = createContext({});
 
-// eslint-disable-next-line react/prop-types
+
 function AuthContextProvider({children}) {
     const [isAuth, toggleIsAuth] = useState({
         isAuth: false,
@@ -18,9 +18,9 @@ function AuthContextProvider({children}) {
         console.log('auth', isAuth);
     }, [isAuth]);
 
-    // MOUNTING EFFECT
+
     useEffect(() => {
-        // Check for token in local storage
+
         const token = localStorage.getItem('token');
         if (token) {
             const decoded = jwt_decode(token);
@@ -35,7 +35,7 @@ function AuthContextProvider({children}) {
     }, []);
 
     function login(JWT) {
-        // Store token and fetch user data
+
         localStorage.setItem('token', JWT);
         const decoded = jwt_decode(JWT);
         fetchUserData(decoded.sub, JWT, '/profiel');
@@ -44,7 +44,7 @@ function AuthContextProvider({children}) {
 
     function logout() {
         localStorage.clear();
-        console.log('Local storage after clear:', localStorage); // Debugging
+        console.log('Local storage after clear:', localStorage);
         toggleIsAuth({
             isAuth: false,
             user: null,
@@ -60,7 +60,7 @@ function AuthContextProvider({children}) {
             const response = await axios.get(`https://api.datavortex.nl/fietsweerapp/users/${id}`, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Api-Key': `fietsweerapp:${apiKey}`,// Replace with process.env.API_KEY in production
+                    'X-Api-Key': `fietsweerapp:${apiKey}`,
                     'Authorization': `Bearer ${token}`
                 }
             });

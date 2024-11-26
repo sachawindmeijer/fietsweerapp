@@ -21,8 +21,8 @@ function NavBar() {
                                 <Link
                                     to="/loguit"
                                     onClick={(e) => {
-                                        e.preventDefault(); // Voorkom standaard linkgedrag
-                                        logout(); // Context-logout aanroepen
+                                        e.preventDefault();
+                                        logout();
                                         console.log('Logout clicked');
                                     }}
                                 >

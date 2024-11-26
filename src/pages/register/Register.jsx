@@ -31,9 +31,9 @@ function Register() {
 
         try {
             const response = await axios.post('https://api.datavortex.nl/fietsweerapp/users', {
-                username: data.username,   // Voeg de username toe
-                email: data.email,         // Voeg de email toe
-                password: data.password,   // Voeg het wachtwoord toe
+                username: data.username,
+                email: data.email,
+                password: data.password,
                 authorities: [
                     { "authority": "USER" }
                 ]
@@ -50,9 +50,9 @@ function Register() {
             console.error('Request failed:', error.message);
 
         }   if (e.response) {
-            console.error('Response Data:', e.response.data);  // Log de foutmelding van de server
-            console.error('Response Status:', e.response.status);  // Log de HTTP status
-            console.error('Response Headers:', e.response.headers);  // Log de headers van de server response
+            console.error('Response Data:', e.response.data);
+            console.error('Response Status:', e.response.status);
+            console.error('Response Headers:', e.response.headers);
         }
 
         toggleLoading(false);

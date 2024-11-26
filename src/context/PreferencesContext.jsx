@@ -12,7 +12,7 @@ const PreferencesContextProvider = ({ children }) => {
     });
 
     useEffect(() => {
-        // Haal voorkeursgegevens op uit localStorage en werk de state bij als er gegevens beschikbaar zijn.
+
         const storedPreferences = localStorage.getItem("preferences");
         if (storedPreferences && storedPreferences !== "undefined") {
             try {

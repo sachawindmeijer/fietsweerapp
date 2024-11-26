@@ -10,12 +10,13 @@ function SavedCitiesList() {
     const [cityList] = useContext(CityContext);
     const [preferencesList] = useContext(PreferencesContext);
     const [cityListWeatherData, setCityListWeatherData] = useState([]);
-    const [error, setError] = useState(null); // Use null for initial error state
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
-            setError(null); // Reset error on each effect run
+            setError(null);
+            setCityListWeatherData([]);
 
             try {
                 const apiKey = import.meta.env.VITE_WEER_API_KEY ;
@@ -28,27 +29,27 @@ function SavedCitiesList() {
                     axios.get(
                         `https://api.openweathermap.org/data/2.5/weather?q=${city.location},nl&appid=${apiKey}&lang=nl`
                     )
-                );console.log("cityWeatherPromises:", cityWeatherPromises);
+                );
 
                 const cityWeatherResponses = await Promise.all(cityWeatherPromises);
-                console.log("cityWeatherResponses:", cityWeatherResponses);
+
                 const processedData = cityWeatherResponses.map((response) => {
-                    const { data } = response; // Destructure data directly
-                    console.log("Weather data for", data.name, ":", data);
+                    const { data } = response;
 
                     const weightedTemperature =
-                        (data.main.temp / 100) * preferencesList.preferredWeather.temperature;
+                        ((data.main.temp || 0) / 100) * (preferencesList.preferredWeather.temperature || 1);
                     const weightedCloudiness =
-                        (data.clouds.all / 100) * preferencesList.preferredWeather.cloudiness;
+                        ((data.clouds.all || 0) / 100) * (preferencesList.preferredWeather.cloudiness || 1);
                     const weightedWindspeed =
-                        (data.wind.speed / 100) * preferencesList.preferredWeather.windspeed;
+                        ((data.wind.speed || 0) / 100) * (preferencesList.preferredWeather.windspeed || 1);
+
                     const weightedScore = parseFloat(
                         weightedTemperature + weightedCloudiness + weightedWindspeed
-                    ).toFixed(2);
+                    ).toFixed(2)
 
                     return {
                         ...data,
-                        score: weightedScore,
+                        score: parseFloat(weightedScore),
                     };
                 });
 

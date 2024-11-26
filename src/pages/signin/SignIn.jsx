@@ -31,17 +31,17 @@ function SignIn() {
                     'Content-Type': 'application/json',
                     'X-Api-Key': apiKey
                 }
-            });// het zegt username onbekent kijk even naar de backend beschrijving
+            });
 
             console.log("API Response:", result.data);
 
             const token = result.data.jwt;
-            console.log("Received Token:", token);
 
-            // Controleer of de token geldig is
+
+
             if (isTokenValid(token)) {
                 console.log("Token is valid!");
-                login(token); // Log de gebruiker in
+                login(token);
             } else {
                 console.error("Token is invalid or expired.");
                 toggleError(true);
@@ -51,7 +51,7 @@ function SignIn() {
             console.error("Error:", e);
             console.log("Error Response:", e.response ? e.response.data : e.message);
             if (e.response && e.response.data) {
-                console.log("Error details:", e.response.data); // Log any specific error messages
+                console.log("Error details:", e.response.data);
             }
             toggleError(true);
         }
@@ -83,7 +83,7 @@ function SignIn() {
                                         <InlogField
                                             type="password"
                                             id="password-field"
-                                            register={register("password", { required: true })} // Bind 'password'
+                                            register={register("password", { required: true })}
                                             placeholder="Je wachtwoord"
                                         />
                                     </label>

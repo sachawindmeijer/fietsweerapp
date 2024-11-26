@@ -3,10 +3,6 @@ import {CityContext} from "../../context/CityContext";
 import "./SaveCities.css"
 import Button from "../button/Button.jsx";
 
-// Deze code zorgt voor het opslaan en beheren van steden in een React applicatie.
-//     Gebruikers kunnen steden toevoegen en verwijderen uit een lijst met maximaal 5 items.
-//     De lijst wordt automatisch opgeslagen in de local storage
-
 function SaveCities() {
     const [citiesList, setCitiesList] = useContext(CityContext)
     const [city, setCity] = useState('')
@@ -14,6 +10,11 @@ function SaveCities() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (citiesList.length >= 3) {
+            setError(true);
+            console.error("Het maximum aantal van 3 steden is bereikt.");
+            return;
+        }
         if (city) {
             setError(false);
             let uniqueId = new Date().getTime().toString(36) + new Date().getUTCMilliseconds();
@@ -21,7 +22,7 @@ function SaveCities() {
                 id: uniqueId,
                 location: city,
             };
-            console.log("Adding new city:", newCity)
+
             setCitiesList([newCity, ...citiesList]);
             setCity('')
         } else {
@@ -31,35 +32,39 @@ function SaveCities() {
     }
     const deleteCity = (id) => {
         let newCityList = citiesList.filter((city) => city.id !== id);
-        console.log("Removing city:", id); // Log removed city ID
+
         setCitiesList([...newCityList])
     }
 
     useEffect(() => {
         localStorage.setItem('cities', JSON.stringify(citiesList));
-        console.log("Cities saved to local storage"); // Log local storage update
+        console.log("Cities saved to local storage");
     }, [citiesList])
 
     return (
-        <section className="savecity-container">
-            <h4>Pas jouw voorkeuren hier aan.</h4>
-            <p>Opgeslagen steden: (max 3)</p>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    value={city}
-                    className={error ? 'error' : 'city-input'}
-                    onChange={(e) => setCity(e.target.value)}
-                    placeholder="Voer hier de stad in"
-                />
-                <Button
-                    type="submit"
-                    disabled={citiesList.length === 3}
-                    text='Voeg stad toe'
-                />
+        <section className="form-savecities-container">
+            <h4 >Pas jouw voorkeuren hier aan.</h4>
+            <p >Opgeslagen steden: (max 3)</p>
+            <form onSubmit={handleSubmit} className="input-button-container">
+                <div>
+                    <input
+                        type="text"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        placeholder="Voer hier de locatie in"
+                        className={`city-input ${error ? 'error-input' : ''}`}
+                    />
+                    <Button
+                        type="submit"
+                        disabled={citiesList.length === 3}
+                        text='Voeg de locatie toe'
+                        className="submit-button"
+                    />
+                </div>
+                {error && <p className="error-message">{error}</p>}
             </form>
 
-            <section className="saved-cites-container">
+            <section>
                 {citiesList.map((city) => {
                     const {id, location} = city;
                     return (

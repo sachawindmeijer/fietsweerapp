@@ -12,6 +12,8 @@ import NavBar from "../../components/navBar/NavBar";
 import Search from "../../components/search/Search.jsx";
 import kaart from "../../assets/nlkaart.png"
 import Footer from "../../components/footer/Footer.jsx";
+import {Link, useNavigate} from 'react-router-dom';
+import Button from "../../components/button/Button.jsx";
 
 
 function Home() {
@@ -27,7 +29,7 @@ function Home() {
             setError(false);
             toggleLoading(true);
             try {
-                const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${import.meta.env.VITE_API_KEY}&lang=nl`);
+                const result = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location},nl&appid=${import.meta.env.VITE_WEER_API_KEY}&lang=nl`);
 
                 setWeatherData(result.data);
                 console.log("home", result.data)
@@ -56,6 +58,7 @@ function Home() {
                             {isAuth ?
                                 <section className="saved-cities-list-container">
                                     <SavedCitiesList/>
+
                                 </section>
                                 :
                                 <article className="saved-cities-logout-container">
@@ -63,6 +66,7 @@ function Home() {
                                         Maak een account of log in om jouw favoriete steden te bewaren en hier te
                                         bekijken.
                                     </p>
+
                                 </article>
                             }
                             <div className="image-and-search-container">
@@ -72,6 +76,7 @@ function Home() {
 
                                 <section className="weather-search-container">
                                     <Search setLocationHandler={setLocation}/>
+
                                     {error &&
                                         (<span className="wrong-location-error">
                            De locatie bestaat niet in nederland. Kijk de spelling na.
@@ -80,6 +85,7 @@ function Home() {
                                     <span className="locationdetails">
                         {loading && (<span>Loading...</span>)}
 
+
                                         {weatherData && <article className="weather-data">
                                             <h4>{weatherData.name} {kelvinToCelcius(weatherData.main.temp)}
                                                 <div className="icon-wrapper">
@@ -87,11 +93,11 @@ function Home() {
                                                 </div>
                                             </h4>
                                             <div className="info-weahter">
-                                            <p>{weatherData.weather[0].description}</p>
-                                            <p>Windrichting: {windDirection(weatherData.wind.deg)}</p>
-                                            <p>Windkracht: {windSpeed(weatherData.wind.speed)}</p>
-                                            <p>Luchtvochtigheid: {weatherData.main.humidity}% </p>
-                                            <p>Bewolking: {weatherData.clouds.all}%</p>
+                                                <p>{weatherData.weather[0].description}</p>
+                                                <p>Windrichting: {windDirection(weatherData.wind.deg)}</p>
+                                                <p>Windkracht: {windSpeed(weatherData.wind.speed)}</p>
+                                                <p>Luchtvochtigheid: {weatherData.main.humidity}% </p>
+                                                <p>Bewolking: {weatherData.clouds.all}%</p>
                                             </div>
                                         </article>
                                         }

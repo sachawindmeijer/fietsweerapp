@@ -8,11 +8,6 @@ import humidityIcon from "../../assets/icons/humidity.png"
 import cloudIcon from "../../assets/icons/clouds blue.png"
 import "./WeatherCard.css"
 
-
-
-// Deze code maakt een herbruikbare React component die weerinformatie
-// toont in een mooie en informatieve weerkaart
-
 function WeatherCard({
                          name,
                          tempK,

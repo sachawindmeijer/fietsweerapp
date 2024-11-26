@@ -2,8 +2,6 @@ import jwtDecode from "jwt-decode";
 
 function isTokenValid(token) {
     try {
-        // Log token for debugging purposes (optional)
-        console.log("Token:", token);
 
         // Decode the token and handle potential errors
         const decodedToken = jwtDecode(token);
@@ -21,7 +19,7 @@ function isTokenValid(token) {
         const currentTime = Math.floor(Date.now() / 1000); // More efficient for seconds
         return expirationTime > currentTime;
     } catch (error) {
-        console.error("Fout bij het decoderen van token:", error);
+        console.error("Fout bij het decoderen van token:", error.message);
         return false;
     }
 }

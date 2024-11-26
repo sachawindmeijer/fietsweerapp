@@ -3,119 +3,6 @@
     height: 100vh;
 }
 
-/*.button {*/
-/*    color: black; !* or keep dodgerblue *!*/
-/*    background-color: white; !* or white *!*/
-/*    !*padding: 66px;*!*/
-/*    margin: 6px;*/
-/*    !*border: solid 2px black;*!*/
-/*    border-radius: 5px;*/
-/*}*/
-
-/*.outer-container {*/
-/*    padding: 18px 22px 12px 22px;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*}*/
-
-/*.input-field {*/
-/*    text-align: center;*/
-/*}*/
-
-/*.linkstekst {*/
-/*    font-size: 16px;*/
-/*    color: black;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    align-items: center;*/
-
-/*}*/
-
-
-/*.form-container {*/
-/*    display: flex;*/
-/*    max-width: 100%;*/
-/*    flex-direction: column;*/
-/*    align-items: center;*/
-/*    background: #2a5fff;*/
-/*    margin: 10px;*/
-/*    padding: 10px;*/
-/*    border-radius: 5px;*/
-/*    text-align: center;*/
-/*    color: white;*/
-/*}*/
-
-/*.}
-
-.outer-container {
-    display: flex;
-    justify-content: center;
-}
-
-.form-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #2a5fff;
-    margin: 10px;
-    padding: 20px;
-    border-radius: 5px;
-    color: white;
-    max-width: 400px;
-    width: 100%;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.input-container {
-    margin-bottom: 20px;
-    width: 100%;
-}
-
-.input-field {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: none;
-    border-radius: 5px;
-}
-
-.form-button {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.button:disabled {
-    background-color: #aaa;
-}
-
-.button:hover {
-    background-color: #45a049;
-}
-
-
-
-
-
-
- */
-
 .outer-container {
     /*display: flex;*/
     /*justify-content: center;*/
@@ -141,6 +28,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    gap: 20px; /* Voegt ruimte tussen de elementen toe */
 }
 
 .input-container {
@@ -157,25 +45,20 @@
 }
 
 .form-button {
+    margin-top: 0;
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.button {
+.buttonR {
+    margin: 0;
     padding: 10px 20px;
-    /*background-color: #4CAF50;*/
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
 }
 
 .button:disabled {
     background-color: #aaa;
 }
 
-/*.button:hover {*/
-/*    background-color: #45a049;*/
-/*}*/
+
+

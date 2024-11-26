@@ -30,18 +30,29 @@ function Register() {
         toggleLoading(true);
 
         try {
-            const response = await axios.post('https://frontend-educational-backend.herokuapp.com/api/auth/signup', {
-                email: data.email,
-                username: data.username,
-                password: data.password,
-                role: ["user"]
+            const response = await axios.post('https://api.datavortex.nl/fietsweerapp/users', {
+                username: data.username,   // Voeg de username toe
+                email: data.email,         // Voeg de email toe
+                password: data.password,   // Voeg het wachtwoord toe
+                authorities: [
+                    { "authority": "USER" }
+                ]
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Api-Key': 'fietsweerapp:hBH5OAPQhRKCdFlifgTZ'  // Zorg ervoor dat de juiste API-key wordt gebruikt
+                }
             });
 
-            console.log('response', response);
+            console.log('response', response.data);
             navigate('/login');
-        } catch (e) {
-            console.error(e);
-            toggleError(true);
+        } catch (error) {
+            console.error('Request failed:', error.message);
+
+        }   if (e.response) {
+            console.error('Response Data:', e.response.data);  // Log de foutmelding van de server
+            console.error('Response Status:', e.response.status);  // Log de HTTP status
+            console.error('Response Headers:', e.response.headers);  // Log de headers van de server response
         }
 
         toggleLoading(false);
@@ -118,7 +129,7 @@ function Register() {
                                 {error &&
                                     <p className="error">Dit account bestaat al. Probeer een ander emailadres.</p>}
                                 <Button
-                                    className="buttonr"
+                                    className="buttonR"
                                     type="submit"
                                     disabled={loading}
                                     text='Registreren'

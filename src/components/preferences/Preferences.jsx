@@ -3,8 +3,10 @@ import {useForm} from "react-hook-form";
 import {PreferencesContext} from "../../context/PreferencesContext";
 import "./Preferences.css"
 import Button from "../button/Button.jsx";
+import {useNavigate} from "react-router-dom";
 
 function Preferences() {
+    const navigate = useNavigate();
     const [preferencesList, setPreferencesList] = useContext(PreferencesContext)
     const {register, handleSubmit, watch} = useForm({
         defaultValues: {
@@ -13,8 +15,7 @@ function Preferences() {
             windspeed: preferencesList.preferredWeather.windspeed,
         }
     })
-    // Deze functie observeert veranderingen in de waardes van de geregistreerde formulier
-    // elementen en retourneert de actuele waarde.
+
     const watchCloudiness = watch("cloudiness")
     const watchWindspeed = watch("windspeed")
 
@@ -30,17 +31,16 @@ function Preferences() {
             setPreferencesList(newPreferences);
             localStorage.setItem('preferences', JSON.stringify(newPreferences));
 
+            navigate('/');
         }
     };
-    // useEffect(() => {
-    //     localStorage.setItem('preferences', JSON.stringify(preferencesList))
-    // }, [preferencesList])
+
     return (
-        <main>
+      <main>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <article>
                     <p>Temperatuurvoorkeur</p>
-                    <p>koud<input type="range" placeholder="temperature" {...register("temperature", {})}/> Heel Warm
+                    <p>Koud - warm<input type="range" placeholder="temperature" {...register("temperature", {})}/>
                     </p>
                 </article>
                 <article>
@@ -48,15 +48,18 @@ function Preferences() {
                     <input type="range" placeholder="cloudiness"{...register("cloudiness", {})}/>
                 </article>
                 <article>
-                    <p>wind op schaal: {watchWindspeed}</p>
+                    <p>Windkracht: {watchWindspeed}</p>
                     <input type="range" placeholder="windspeed" max="12" {...register("windspeed", {})}/>
                 </article>
+                <div className="button-container" >
                 <Button
                     className='preferences-button'
                     type="submit"
                     text='Opslaan'
                 />
+                </div>
             </form>
+
         </main>
     )
 }

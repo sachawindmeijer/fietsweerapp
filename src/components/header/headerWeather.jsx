@@ -2,32 +2,32 @@ import React from "react";
 import {useLocation} from "react-router-dom";
 import './HeaderWeather.css'
 
-function HeaderWeather() {
+function HeaderWeather({ title, onClick }) {
     const location = useLocation();
 
     function getPageName() {
         switch (location.pathname) {
             case "/" :
-                return "Home"
+                return "Home";
             case "/login" :
-                return "Login"
+                return "Login";
             case "/registreren" :
-                return "Account Registratie"
+                return "Account Registratie";
             case "/profiel" :
-                return "Profiel"
+                return "Profiel";
             case "/loguit" :
-                return "Loguit"
+                return "Loguit";
             default:
-                return null
+                return "Onbekende pagina";
         }
     }
 
     return (
-        <header className="headerBar">
-            <h1>FIETSWEER</h1>
+        <header className="headerBar" onClick={onClick}>
+            <h1>{title}</h1>
             <h3>{getPageName()}</h3>
         </header>
-    )
+    );
 }
 
-export default HeaderWeather
+export default HeaderWeather;

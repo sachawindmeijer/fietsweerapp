@@ -17,6 +17,6 @@ const WeatherIcon = ({ type }) => {
     };
 
     return weatherIcons[type] || weatherIcons.default;
-};
+}
 
 export default WeatherIcon;

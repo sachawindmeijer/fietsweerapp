@@ -5,7 +5,7 @@ import { LocationContext } from "../../context/LocationContext.jsx";
 import WeatherCard from "../weatheroverview/WeatherOverview.jsx";
 import Button from "../button/Button.jsx";
 import {Link, useNavigate} from 'react-router-dom';
-import {fetchWeather} from "../../helpers/weather.jsx";
+import {fetchWeather} from "../weather/weather.jsx";
 
 function SavedLocationList() {
     const [locationList] = useContext(LocationContext);

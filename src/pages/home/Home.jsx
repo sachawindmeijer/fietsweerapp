@@ -14,7 +14,8 @@ import kaart from "../../assets/nlkaart.png"
 import Footer from "../../components/footer/Footer.jsx";
 import {Link, useNavigate} from 'react-router-dom';
 import Button from "../../components/button/Button.jsx";
-import {fetchWeather} from "../../helpers/weather.jsx";
+import {fetchWeather} from "../../components/weather/weather.jsx";
+
 
 
 function Home() {
@@ -23,6 +24,8 @@ function Home() {
     const [weatherData, setWeatherData] = useState(null);
     const [loading, toggleLoading] = useState(false);
     const {isAuth} = useContext(AuthContext)
+    const [hourlyData, setHourlyData] = useState([]);
+
 
 
     useEffect(() => {
@@ -32,6 +35,7 @@ function Home() {
                 toggleLoading(true);
                 const data = await fetchWeather(location);
                 setWeatherData(data);
+
             } catch (error) {
                 console.error(error);
                 setError(true);
@@ -98,6 +102,7 @@ function Home() {
                                                 <p>Luchtvochtigheid: {weatherData.main.humidity}% </p>
                                                 <p>Bewolking: {weatherData.clouds.all}%</p>
                                             </div>
+
                                         </article>
                                         }
                         </span>

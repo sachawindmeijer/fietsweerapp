@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from "react";
 import {LocationContext} from "../../context/LocationContext.jsx";
 import "./SaveCities.css"
 import Button from "../button/Button.jsx";
-import {fetchWeather} from "../../helpers/weather.jsx";
+import {fetchWeather} from "../weather/weather.jsx";
 
 function SaveLocation() {
     const [locationList, setLocationList] = useContext(LocationContext);

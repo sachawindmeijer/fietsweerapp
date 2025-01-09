@@ -1,8 +1,10 @@
 import React, {useState, useEffect, useContext} from "react";
 import {LocationContext} from "../../context/LocationContext.jsx";
-import "./SaveCities.css"
+import "./SaveLocation.css"
 import Button from "../button/Button.jsx";
 import {fetchWeather} from "../weather/weather.jsx";
+import InputField from "../inputField/InputField.jsx";
+
 
 function SaveLocation() {
     const [locationList, setLocationList] = useContext(LocationContext);
@@ -77,7 +79,7 @@ function SaveLocation() {
             <p>Opgeslagen locaties: (max 3)</p>
             <form onSubmit={handleSubmit} className="input-button-container">
                 <div>
-                    <input
+                    <InputField
                         type="text"
                         value={location}
                         onChange={(e) => setLocation(e.target.value)}
@@ -98,13 +100,12 @@ function SaveLocation() {
                 {locationList.map(({ id, location }) => (
                     <article key={id} className="location-card">
                         <p className="location-name">{location}</p>
-                        <button
+                        <Button
                             type="button"
                             onClick={() => deleteLocation(id)}
                             className="delete-button"
-                        >
-                            Verwijder de locatie
-                        </button>
+                            text="Verwijder de locatie"
+                        />
                     </article>
                 ))}
             </section>

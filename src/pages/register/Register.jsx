@@ -8,6 +8,7 @@ import {ErrorMessage} from "@hookform/error-message";
 import "./Register.css";
 import Button from "../../components/button/Button.jsx";
 import Footer from "../../components/footer/Footer.jsx";
+import InputField from "../../components/inputField/InputField.jsx";
 
 
 function Register() {
@@ -70,13 +71,14 @@ function Register() {
                             <form onSubmit={handleSubmit(onSubmit)} className="form">
                                 <label htmlFor="username-field" className="input-container">
                                     Gebruikersnaam:
-                                    <input
+                                    <InputField
                                         type="text"
                                         id="username-field"
-                                        {...register("username", {
+                                        name="username"
+                                        placeholder="Gebruikersnaam"
+                                        register={register("username", {
                                             required: "Dit moet ingevuld zijn",
                                         })}
-                                        className="input-field"
                                     />
                                     <ErrorMessage
                                         errors={errors}
@@ -87,15 +89,17 @@ function Register() {
 
                                 <label htmlFor="email-field" className="input-container">
                                     E-mail:
-                                    <input
+                                    <InputField
                                         type="text"
                                         id="email-field"
-                                        {...register("email", {
+                                        name="email"
+                                        placeholder="E-mail"
+                                        register={register("email", {
                                             required: "Dit moet ingevuld zijn",
                                             pattern: {
                                                 value: /^(.+)@(.+)$/,
-                                                message: "er mist nog een @"
-                                            }
+                                                message: "Er mist nog een @",
+                                            },
                                         })}
                                         className="input-field"
                                     />
@@ -108,15 +112,17 @@ function Register() {
 
                                 <label htmlFor="password-field" className="input-container">
                                     Wachtwoord:
-                                    <input
+                                    <InputField
                                         type="password"
                                         id="password-field"
-                                        {...register("password", {
+                                        name="password"
+                                        placeholder="Wachtwoord"
+                                        register={register("password", {
                                             required: "Dit moet ingevuld zijn",
                                             minLength: {
                                                 value: 6,
-                                                message: "Het wachtwoord is te kort"
-                                            }
+                                                message: "Het wachtwoord is te kort",
+                                            },
                                         })}
                                         className="input-field"
                                     />

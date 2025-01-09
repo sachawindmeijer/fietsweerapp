@@ -6,7 +6,7 @@ import kelvinToCelcius from "../../helpers/kelvinToCelsius";
 import iconWeather from "../../helpers/iconWeather.jsx";
 import windDirection from "../../helpers/windDirection";
 import windSpeed from "../../helpers/windSpeed";
-import SavedLocationList from "../../components/savedcitieslist/SavedLocationList.jsx";
+
 import HeaderWeather from "../../components/header/headerWeather.jsx";
 import NavBar from "../../components/navBar/NavBar";
 import Search from "../../components/search/Search.jsx";
@@ -15,6 +15,7 @@ import Footer from "../../components/footer/Footer.jsx";
 import {Link, useNavigate} from 'react-router-dom';
 import Button from "../../components/button/Button.jsx";
 import {fetchWeather} from "../../components/weather/weather.jsx";
+import SavedLocationList from "../../components/savedlocationlist/SaveLocationList.jsx";
 
 
 
@@ -120,4 +121,3 @@ function Home() {
 }
 
 export default Home
-

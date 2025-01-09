@@ -135,4 +135,3 @@ function SavedLocationList() {
 }
 
 export default SavedLocationList;
-

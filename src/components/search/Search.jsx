@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 import "./Search.css"
 import Button from "../button/Button.jsx";
+import InputField from "../inputField/InputField.jsx";
 
 function SearchBar({setLocationHandler}) {
     const [query, setQuery] = useState('');
@@ -20,15 +21,14 @@ function SearchBar({setLocationHandler}) {
 
     return (
         <span className="searchbar">
-      <input
-          type="text"
-          name="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyUp={keyPressCheck}
-          placeholder="Zoek een locatie in Nederland"
-          className="searchbar-entry"
-      />
+  <InputField
+      type="text"
+      name="search"
+      placeholder="Zoek een locatie in Nederland"
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      onKeyUp={keyPressCheck}
+  />
 
       <Button
           className="searchbar-button"

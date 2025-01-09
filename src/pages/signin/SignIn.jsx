@@ -6,10 +6,12 @@ import axios from 'axios';
 import HeaderWeather from "../../components/header/headerWeather.jsx";
 import NavBar from "../../components/navbar/NavBar.jsx";
 import "./SignIn.css";
-import InlogField from "../../components/inputField/InlogField.jsx";
+
 import Button from "../../components/button/Button.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 import isTokenValid from "../../helpers/isTokenValid.jsx";
+import InputField from "../../components/inputField/InputField.jsx";
+
 
 
 function SignIn() {
@@ -70,7 +72,7 @@ function SignIn() {
                                 <form onSubmit={handleSubmit(onSubmit)} className="form">
                                     <label htmlFor="username-field" className="input-container">
                                         Gebruikersnaam:
-                                        <InlogField
+                                        <InputField
                                             type="text"
                                             id="username-field"
                                             register={register("username", { required: true })}
@@ -80,7 +82,7 @@ function SignIn() {
 
                                     <label htmlFor="password-field" className="input-container">
                                         Wachtwoord:
-                                        <InlogField
+                                        <InputField
                                             type="password"
                                             id="password-field"
                                             register={register("password", { required: true })}

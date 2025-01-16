@@ -1,11 +1,12 @@
 import kelvinToCelcius from "../../helpers/kelvinToCelsius";
-import iconWeather from "../../helpers/iconWeather.jsx";
+import WeatherIcon from "../../helpers/WeatherIcon.jsx";
 import windDirection from "../../helpers/windDirection";
 import windSpeed from "../../helpers/windSpeed";
 import windSockIcon from "../../assets/icons/windsock.jpg"
 import humidityIcon from "../../assets/icons/humidity.png"
 import cloudIcon from "../../assets/icons/clouds blue.png"
 import "./WeatherOverview.css"
+
 
 function WeatherOverview({
                          name,
@@ -28,7 +29,7 @@ function WeatherOverview({
             <div className="weather-description">
                 <p>{kelvinToCelcius(tempK)}</p>
                 <div className="icon-wrapper">
-                    {iconWeather(weatherMain)}
+                    <WeatherIcon type={weatherMain} />
                 </div>
                 <p>{weatherDescription}</p>
             </div>

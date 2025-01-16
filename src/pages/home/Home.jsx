@@ -3,19 +3,18 @@ import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import './Home.css'
 import kelvinToCelcius from "../../helpers/kelvinToCelsius";
-import iconWeather from "../../helpers/iconWeather.jsx";
 import windDirection from "../../helpers/windDirection";
 import windSpeed from "../../helpers/windSpeed";
-
+import { useNavigate } from 'react-router-dom';
 import HeaderWeather from "../../components/header/headerWeather.jsx";
 import NavBar from "../../components/navBar/NavBar";
 import Search from "../../components/search/Search.jsx";
 import kaart from "../../assets/nlkaart.png"
 import Footer from "../../components/footer/Footer.jsx";
-import {Link, useNavigate} from 'react-router-dom';
-import Button from "../../components/button/Button.jsx";
 import {fetchWeather} from "../../components/weather/weather.jsx";
 import SavedLocationList from "../../components/savedlocationlist/SaveLocationList.jsx";
+import WeatherIcon from "../../helpers/WeatherIcon.jsx";
+import Button from "../../components/button/Button.jsx";
 
 
 
@@ -25,7 +24,7 @@ function Home() {
     const [weatherData, setWeatherData] = useState(null);
     const [loading, toggleLoading] = useState(false);
     const {isAuth} = useContext(AuthContext)
-    const [hourlyData, setHourlyData] = useState([]);
+    const navigate = useNavigate();
 
 
 
@@ -62,7 +61,13 @@ function Home() {
                             {isAuth ?
                                 <section className="saved-cities-list-container">
                                     <SavedLocationList/>
-
+                                    <Button
+                                        type="submit"
+                                        disabled={loading}
+                                        text={loading ? 'Bezig...' : 'Wijzigen'}
+                                        className="submit-button"
+                                        onClick={() => navigate('/profiel')}
+                                    />
                                 </section>
                                 :
                                 <article className="saved-cities-logout-container">
@@ -93,7 +98,7 @@ function Home() {
                                         {weatherData && <article className="weather-data">
                                             <h4>{weatherData.name} {kelvinToCelcius(weatherData.main.temp)}
                                                 <div className="icon-wrapper">
-                                                    {iconWeather(weatherData.weather[0].main)}
+                                                    <WeatherIcon type={weatherData.weather[0].main} />
                                                 </div>
                                             </h4>
                                             <div className="info-weahter">

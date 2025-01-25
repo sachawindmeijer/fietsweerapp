@@ -9,8 +9,6 @@ import "./Register.css";
 import Button from "../../components/button/Button.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 import InputField from "../../components/inputField/InputField.jsx";
-
-
 function Register() {
     const {
         handleSubmit,
@@ -152,5 +150,4 @@ function Register() {
         </div>
     );
 }
-
 export default Register;

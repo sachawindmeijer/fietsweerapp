@@ -6,80 +6,85 @@ import Button from "../button/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import InputField from "../inputField/InputField.jsx";
 
-function Preferences() {
+function Preferences({ defaultValues = {}, onSave }) {
     const navigate = useNavigate();
-    const [preferencesList, setPreferencesList] = useContext(PreferencesContext)
-    const {register, handleSubmit, watch} = useForm({
-        defaultValues: {
-            temperature: preferencesList.preferredWeather.temperature,
-            cloudiness: preferencesList.preferredWeather.cloudiness,
-            windspeed: preferencesList.preferredWeather.windspeed,
+    const [preferencesList] = useContext(PreferencesContext);
+    const formDefaultValues = {
+        temperature: defaultValues.temperature || preferencesList.preferredWeather.temperature,
+        cloudiness: defaultValues.cloudiness || preferencesList.preferredWeather.cloudiness,
+        windspeed: defaultValues.windspeed || preferencesList.preferredWeather.windspeed,
+        ...defaultValues
+    };
+
+    const { register, handleSubmit, watch } = useForm({
+        defaultValues: formDefaultValues,
+    });
+
+    const watchCloudiness = watch("cloudiness");
+    const watchWindspeed = watch("windspeed");
+
+    const onSubmit = (data) => {
+        console.log("Formuliergegevens:", data); // Controleer de output
+        if (onSave) {
+            onSave(data);
         }
-    })
-
-    const watchCloudiness = watch("cloudiness")
-    const watchWindspeed = watch("windspeed")
-
-    const onSubmit = data => {
-        console.log("voorkeur", data);
-        if (data) {
-            let uniqueId =
-                new Date().getTime().toString(36) + new Date().getUTCMilliseconds();
-            let newPreferences = {
-                id: uniqueId,
-                preferredWeather: data,
-            };
-            setPreferencesList(newPreferences);
-            localStorage.setItem('preferences', JSON.stringify(newPreferences));
-
-            navigate('/');
-        }
+        // Navigeer naar home nadat je de gegevens hebt opgeslagen
+        navigate('/');
     };
 
     return (
-      <main>
+        <main>
             <form onSubmit={handleSubmit(onSubmit)}>
+                {/* Temperatuurvoorkeur */}
                 <article>
                     <h3>Temperatuurvoorkeur</h3>
                     <p>Koud - Warm</p>
                     <InputField
                         type="range"
                         id="temperature"
-                        placeholder="temperature"
-                        register={register("temperature")}
-                    />
+                        min="0"
+                        max="60"
 
+                        {...register("temperature")}
+                    />
                 </article>
+
+                {/* Bewolking */}
                 <article>
-                    <p>Bewolking:{watchCloudiness}%</p>
+                    <p>Bewolking: {watchCloudiness}%</p>
                     <InputField
                         type="range"
                         id="cloudiness"
-                        placeholder="cloudiness"
-                        register={register("cloudiness")}
+                        min="0"
+                        max="100"
+
+                        {...register("cloudiness")}
                     />
                 </article>
+
+                {/* Windsnelheid */}
                 <article>
                     <p>Windkracht: {watchWindspeed}</p>
                     <InputField
                         type="range"
                         id="windspeed"
-                        placeholder="windspeed"
+                        min="0"
                         max="12"
-                        register={register("windspeed")}
+                        {...register("windspeed")}
                     />
                 </article>
-                <div className="button-container" >
-                <Button
-                    className='preferences-button'
-                    type="submit"
-                    text='Opslaan'
-                />
+
+                {/* Opslaan-knop */}
+                <div className="button-container">
+                    <Button
+                        className="preferences-button"
+                        type="submit"
+                        text="Opslaan"
+                    />
                 </div>
             </form>
-
         </main>
-    )
+    );
 }
 
 export default Preferences

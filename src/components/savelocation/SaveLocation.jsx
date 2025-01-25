@@ -2,20 +2,26 @@ import React, {useState, useEffect, useContext} from "react";
 import {LocationContext} from "../../context/LocationContext.jsx";
 import "./SaveLocation.css"
 
-import {fetchWeather} from "../weather/weather.jsx";
+
 
 import LocationList from "../locationlist/LocationList.jsx";
 import LocationForm from "../locationform/LocationForm.jsx";
 
 
-function SaveLocation() {
+function SaveLocation({
+                          fetchWeather,
+                          maxLocations = 3,
+                          onError = (message) => console.error(message),
+
+                      }) {
+
     const [locationList, setLocationList] = useContext(LocationContext);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
     const addLocation = async (location) => {
-        if (locationList.length >= 3) {
-            setError('Het maximum aantal van 3 locaties is bereikt.');
+        if (locationList.length >= maxLocations) {
+            setError(`Het maximum aantal van ${maxLocations} locaties is bereikt.`);
             return;
         }
 
@@ -23,20 +29,22 @@ function SaveLocation() {
             setLoading(true);
             setError('');
             const data = await fetchWeather(location);
-
             if (data?.name) {
                 const uniqueId = `${Date.now().toString(36)}${new Date().getUTCMilliseconds()}`;
                 const newLocation = { id: uniqueId, location: data.name };
                 setLocationList([newLocation, ...locationList]);
+
             } else {
-                setError('De locatie werd gevonden, maar de informatie is incompleet.');
+                setError('De locatie is niet gevonden. Controleer de spelling.');
             }
-        } catch {
+        } catch (error) {
             setError('Er is een probleem met het ophalen van gegevens. Probeer het later opnieuw.');
+            onError(error.message || 'Onbekende fout');
         } finally {
             setLoading(false);
         }
     };
+
     const deleteLocation = (id) => {
         const updatedList = locationList.filter((loc) => loc.id !== id);
         setLocationList(updatedList);
@@ -44,7 +52,11 @@ function SaveLocation() {
 
     useEffect(() => {
         // Opslaan in localStorage
-        localStorage.setItem('locations', JSON.stringify(locationList));
+        try {
+            localStorage.setItem('locations', JSON.stringify(locationList));
+        } catch (error) {
+            console.error('Fout bij het opslaan in localStorage:', error);
+        }
     }, [locationList]);
 
     return (

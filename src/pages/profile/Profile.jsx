@@ -5,6 +5,7 @@ import NavBar from "../../components/navbar/NavBar.jsx";
 import SaveLocation from "../../components/savelocation/SaveLocation.jsx";
 import Preferences from "../../components/preferences/Preferences.jsx";
 import Footer from "../../components/footer/Footer.jsx";
+import fetchWeather from "../../components/weather/weather.jsx";
 
 
 function Profile() {
@@ -18,7 +19,12 @@ function Profile() {
 
                         <div className="city-and-preferences-container">
                             <section className="saved-cities-container">
-                                <SaveLocation/>
+                                <SaveLocation
+                                    fetchWeather={fetchWeather}
+                                    maxLocations={3}
+                                    onError={(message) => console.error(message)}
+
+                                />
                             </section>
                             <section className="preferences-container">
                                 <Preferences/>

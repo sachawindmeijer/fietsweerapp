@@ -12,12 +12,17 @@ const PreferencesContextProvider = ({ children }) => {
     });
 
     useEffect(() => {
-
         const storedPreferences = localStorage.getItem("preferences");
         if (storedPreferences && storedPreferences !== "undefined") {
             try {
                 const parsedPreferences = JSON.parse(storedPreferences);
-                setPreferencesList(parsedPreferences);
+                // Controleer of de opgeslagen voorkeuren het juiste formaat hebben
+                if (
+                    parsedPreferences &&
+                    parsedPreferences.preferredWeather
+                ) {
+                    setPreferencesList(parsedPreferences);
+                }
             } catch (error) {
                 console.error("Error parsing preferences from localStorage", error);
             }
@@ -26,7 +31,9 @@ const PreferencesContextProvider = ({ children }) => {
 
     useEffect(() => {
         // Sla de voorkeursgegevens op in localStorage wanneer deze worden bijgewerkt.
-        localStorage.setItem("preferences", JSON.stringify(preferencesList));
+        if (preferencesList) {
+            localStorage.setItem("preferences", JSON.stringify(preferencesList));
+        }
     }, [preferencesList]);
 
     return (

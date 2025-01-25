@@ -1,20 +1,17 @@
 import React, {useContext, useEffect, useState} from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
 import {LocationContext} from "../../context/LocationContext.jsx";
 import {PreferencesContext} from "../../context/PreferencesContext.jsx";
-import {WeatherCardList} from "../weathercardlist/WeatherCardList.jsx";
-import {fetchWeather} from "../weather/weather.jsx";
+import WeatherCardList from "../weathercardlist/WeatherCardList.jsx";
+import fetchWeather from "../weather/weather.jsx";
 import CalculateWeightedScore from "../../helpers/CalculateWeightedScore.jsx";
 
 
-function SavedLocationList() {
+function SavedLocationList({ onWeatherDataFetched, onError }) {
     const [locationList] = useContext(LocationContext);
     const [preferencesList] = useContext(PreferencesContext);
-
     const [locationListWeatherData, setLocationListWeatherData] = useState([]);
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchWeatherData = async () => {
@@ -31,15 +28,23 @@ function SavedLocationList() {
 
                 weatherData.sort((a, b) => b.score - a.score);
                 setLocationListWeatherData(weatherData);
+
+                if (onWeatherDataFetched) {
+                    onWeatherDataFetched(weatherData);
+                }
+
                 console.log("Weerdata succesvol opgehaald:", weatherData);
             } catch (err) {
                 console.error("Fout bij ophalen van gegevens:", err.message);
                 setError("Er is een probleem met het ophalen van gegevens. Probeer het later opnieuw.");
+                if (onError) {
+                    onError(err.message);
+                }
             }
         };
 
         fetchWeatherData();
-    }, [locationList, preferencesList]);
+    }, [locationList, preferencesList, onWeatherDataFetched, onError]);
 
     if (error) {
         return <span className="weather-error"><p>{error}</p></span>;

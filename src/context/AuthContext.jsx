@@ -54,7 +54,7 @@ function AuthContextProvider({children}) {
     }
 
 
-    const apiKey = import.meta.env.VITE_APP_DATA_API_KEY;
+    const apiKey = import.meta.env.DATA_API_KEY;
     async function fetchUserData(id, token, redirectUrl) {
         try {
             const response = await axios.get(`https://api.datavortex.nl/fietsweerapp/users/${id}`, {

@@ -11,7 +11,7 @@ import NavBar from "../../components/navBar/NavBar";
 import Search from "../../components/search/Search.jsx";
 import kaart from "../../assets/nlkaart.png"
 import Footer from "../../components/footer/Footer.jsx";
-import {fetchWeather} from "../../components/weather/weather.jsx";
+import fetchWeather from "../../components/weather/weather.jsx";
 import SavedLocationList from "../../components/savedlocationlist/SaveLocationList.jsx";
 import WeatherIcon from "../../helpers/WeatherIcon.jsx";
 import Button from "../../components/button/Button.jsx";
@@ -30,19 +30,22 @@ function Home() {
 
     useEffect(() => {
         async function getWeather() {
-            try {
-                setError(false);
-                toggleLoading(true);
-                const data = await fetchWeather(location);
-                setWeatherData(data);
+            try  {setError(null);  // Reset error when starting a new request
+            toggleLoading(true);
+            const data = await fetchWeather(location);
 
-            } catch (error) {
-                console.error(error);
-                setError(true);
-            } finally {
-                toggleLoading(false);
+            if (data.error) {
+                setError(data.error);  // Set specific error message if there is an error
+            } else {
+                setWeatherData(data);  // Set weather data if no error
             }
+        } catch (error) {
+            console.error(error);
+            setError("Er is een onbekende fout opgetreden. Probeer het later opnieuw.");
+        } finally {
+            toggleLoading(false);
         }
+    }
 
         if (location) {
             getWeather();
@@ -88,7 +91,7 @@ function Home() {
 
                                     {error &&
                                         (<span className="wrong-location-error">
-                           De locatie bestaat niet in nederland. Kijk de spelling na.
+                          {error}
                         </span>)}
 
                                     <span className="locationdetails">
@@ -96,11 +99,11 @@ function Home() {
 
 
                                         {weatherData && <article className="weather-data">
-                                            <h4>{weatherData.name} {kelvinToCelcius(weatherData.main.temp)}
+                                            <h3>{weatherData.name} {kelvinToCelcius(weatherData.main.temp)}
                                                 <div className="icon-wrapper">
                                                     <WeatherIcon type={weatherData.weather[0].main} />
                                                 </div>
-                                            </h4>
+                                            </h3>
                                             <div className="info-weahter">
                                                 <p>{weatherData.weather[0].description}</p>
                                                 <p>Windrichting: {windDirection(weatherData.wind.deg)}</p>

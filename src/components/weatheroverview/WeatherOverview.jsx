@@ -1,4 +1,4 @@
-import kelvinToCelcius from "../../helpers/kelvinToCelsius";
+// import kelvinToCelcius from "../../helpers/kelvinToCelsius";
 import WeatherIcon from "../../helpers/WeatherIcon.jsx";
 import windDirection from "../../helpers/windDirection";
 import windSpeed from "../../helpers/windSpeed";
@@ -10,8 +10,7 @@ import "./WeatherOverview.css"
 
 function WeatherOverview({
                          name,
-                         tempK,
-                         score,
+                         temp,
                          weatherMain,
                          weatherDescription,
                          windDegree,
@@ -19,6 +18,7 @@ function WeatherOverview({
                          humidity,
                          clouds,
                          id,
+    score
                      }) {
     return (
         <article className="weather-overview" key={id}>
@@ -27,7 +27,7 @@ function WeatherOverview({
                 <p>Score: {score}</p>
             </div>
             <div className="weather-description">
-                <p>{kelvinToCelcius(tempK)}</p>
+                <p>{temp}</p>
                 <div className="icon-wrapper">
                     <WeatherIcon type={weatherMain} />
                 </div>

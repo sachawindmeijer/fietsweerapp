@@ -1,51 +1,76 @@
-.icon-wrapper {
-    width: 25px;
-}
-
 .outer-container {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: stretch;
     flex-wrap: wrap;
+    width: 100%;
+    min-width: 320px;
+    flex-basis: 100%;
 }
 
 .inner-container {
     display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 0;
-    justify-content: space-between;
-    flex: 1;
+    flex-basis: 100%;
+    min-width: 300px;
+    max-width: 1200px;
+    border-radius: 5px;
+    margin: 0 auto;
 }
 
-.saved-cities-list-container, .saved-cities-logout-container {
-    width: 50%;
-    background: #2a5fff;
-    color: white;
-}
-
-.saved-cities-list-container, .saved-cities-logout-container, .image-and-search-container {
-    flex: 1;
+.saved-cities-list-container{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-width: 400px;
-    padding: 5px;
+    margin-right: 15px;
+    flex-basis: 48%;
+    min-width: 320px;
+    color: white;
     border-radius: 5px;
 }
 
-.saved-cities-logout-message, .weather-error {
+
+.submit-button {
+    display: flex;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 auto;
+    justify-content: center;
+
+}
+.saved-cities-list-container, .saved-cities-logout-container {
+    flex-basis: 48%;
+    background: #2a5fff;
+    margin: 0 15px 0 0;
+    border-radius: 5px;
+}
+
+.image-and-search-container {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    padding: 5px;
-    min-width: 290px;
-    justify-content: space-between;
+    align-items: center;
+    flex-basis: 100%;
+}
+
+.image-container {
+    flex-basis: auto; /* Laat de afbeelding zich aanpassen */
+    max-width: 600px;
+    overflow: hidden;
 }
 
 .image-container img {
     width: 100%;
     height: auto;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+}
+
+.weather-search-container {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    min-width: 300px;
+    align-items: flex-start;
 }
 
 .search-city {
@@ -54,60 +79,62 @@
     object-fit: contain;
     justify-content: center;
     padding-bottom: 20px;
-    flex-direction: column;
+    flex-basis: 100%;
 }
 
-.image-and-search-container {
+.weather-data{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex-basis: 100%;
+    min-width: 300px;
 }
-
-.image-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-}
-
-.weather-search-container {
-    width: 100%;
+.sort-info{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex-basis: 100%;
+    min-width: 300px;
 }
 
-.locationdetails {
-    padding: 10px;
-    margin-top: 10px;
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 5px;
+.info-weather{
+    display: flex;
+    flex-basis: 100%;
+    min-width: 300px;
+    color: black;
+}
+.info-weather p{
+    display: flex;
+    justify-content: space-between;
+    padding: 9px;
+    margin: 5px 0;
+    flex-basis: auto;
 }
 
-.locationdetails p {
+.icon-wrapper-search{
+    display: flex;
+    flex-direction: row;
+    flex-basis: auto;
+}
+
+.icon-wrapper-search .info-weather{
+    display: flex;
+    flex-direction: row;
+    flex-basis: 100%;
+}
+
+.info-weather p{
     color: #2a5fff;
     margin: 5px 0;
-    text-align: left;
-
 }
-
-.edit-button {
-    background-color: #4CAF50; /* Green background */
-    color: white;             /* White text */
-    padding: 10px 15px;       /* Padding */
-    margin-top: 10px;         /* Space above button */
-    border: none;             /* Remove border */
-    border-radius: 5px;       /* Rounded corners */
-    cursor: pointer;          /* Pointer cursor on hover */
-    font-size: 14px;          /* Font size */
-}
-
-
 @media (max-width: 768px) {
     .outer-container {
         flex-direction: column;
-        .image-container {
-            max-height: 150px;
-        }
+    }
+    .image-container {
+        max-height: 50vh;
+    }
+    .inner-container  {
+        flex-direction: column;
+        align-items: center;
+        flex-basis: 100%;
     }
 }

@@ -26,14 +26,13 @@ function WeatherOverview({
                 <h4>{name}</h4>
                 <p>Score: {score}</p>
             </div>
-            <div className="weather-description">
+            <div className="weather-description-container">
                 <p>{temp}</p>
                 <div className="icon-wrapper">
                     <WeatherIcon type={weatherMain} />
                 </div>
                 <p>{weatherDescription}</p>
-            </div>
-            <div className="weather-flex">
+
                 <p><span className="flex"><img src={windSockIcon} alt="Windsok" width="20"/>
                 :{windSpeed(weatherWindSpeed)}, {windDirection(windDegree)}</span></p>
                 <p><span className="flex"><img src={humidityIcon} alt="Luchtvochtigheid" width="20"/>

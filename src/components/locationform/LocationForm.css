@@ -1,0 +1,14 @@
+.input-button-container{
+    display:flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-width: 200px;
+    max-width: 100%;
+}
+.form-button{
+    display: flex;
+    flex: 0 1 150px;
+    min-width: 120px;
+    white-space: nowrap;
+    font-size: 1.0rem;
+}

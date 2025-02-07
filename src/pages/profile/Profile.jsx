@@ -10,20 +10,18 @@ import fetchWeather from "../../components/weather/weather.jsx";
 
 function Profile() {
     return (
-        <div>
             <main>
                 <div className="background">
                     <HeaderWeather/>
                     <NavBar/>
                     <div className="outer-container">
 
-                        <div className="city-and-preferences-container">
+                        <div className="preferences-inner-container">
                             <section className="saved-cities-container">
                                 <SaveLocation
                                     fetchWeather={fetchWeather}
                                     maxLocations={3}
                                     onError={(message) => console.error(message)}
-
                                 />
                             </section>
                             <section className="preferences-container">
@@ -31,10 +29,10 @@ function Profile() {
                             </section>
                         </div>
                     </div>
+                    <Footer/>
                 </div>
+
             </main>
-            <Footer/>
-        </div>
     )
 }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import InputField from "../inputField/InputField.jsx";
 import Button from "../button/Button.jsx";
+import "./LocationForm.css"
 function LocationForm({ onAddLocation, error, loading, placeholder = "Voer hier de locatie in", buttonText = "Voeg de locatie toe" }) {
     const [location, setLocation] = useState('');
 
@@ -13,8 +14,8 @@ function LocationForm({ onAddLocation, error, loading, placeholder = "Voer hier 
     };
 
     return (
-        <form onSubmit={handleSubmit} className="input-button-container">
-            <div>
+        <form onSubmit={handleSubmit} >
+            <div className="input-button-container">
                 <InputField
                     type="text"
                     value={location}
@@ -26,7 +27,7 @@ function LocationForm({ onAddLocation, error, loading, placeholder = "Voer hier 
                     type="submit"
                     disabled={loading}
                     text={loading ? 'Bezig...' : buttonText}
-                    className="submit-button"
+                    className="form-button"
                 />
             </div>
             {error && <p className="error-message">{error}</p>}

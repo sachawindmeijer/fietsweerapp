@@ -1,0 +1,41 @@
+.list-container{
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    padding: 0 10px 10px 10px;
+    margin: 0 auto;
+
+}
+
+.location-name{
+    white-space: nowrap;
+    font-size: 1.3rem;
+    flex: 1 1 200px; /* Basisgrootte 200px, kan groeien en krimpen */
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: start;
+}
+
+.location-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex: 1 1;
+    max-width: 600px;
+    gap: 0.5rem;
+}
+
+.delete-button{
+    display: flex;
+    white-space: nowrap;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-align: center;
+    flex: 1 ;
+    min-width: 50%;
+    max-width: 100%;
+    margin: 0 auto;
+    justify-content: center;
+}

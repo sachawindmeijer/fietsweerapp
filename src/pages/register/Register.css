@@ -4,10 +4,10 @@
 }
 
 .outer-container {
-    /*display: flex;*/
-    /*justify-content: center;*/
-
-
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-width: 320px;
 }
 
 .form-wrapper {
@@ -21,6 +21,7 @@
     color: white;
     max-width: 400px;
     width: 100%;
+    flex-basis: 100%;
 }
 
 .form {
@@ -28,20 +29,24 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    gap: 20px; /* Voegt ruimte tussen de elementen toe */
+    gap: 20px;
+    flex-basis: 100%;
+    /*border: 2px dashed yellow;*/
 }
 
 .input-container {
     margin-bottom: 20px;
     width: 100%;
+    /*border: brown;*/
 }
 
 .input-field {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border: none;
+    /*border: none;*/
     border-radius: 5px;
+    /*border: coral;*/
 }
 
 .form-button {
@@ -49,6 +54,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-basis: 100%;
+    /*border: #6c757d;*/
 }
 
 .buttonR {

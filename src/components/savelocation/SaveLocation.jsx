@@ -60,10 +60,20 @@ function SaveLocation({
     }, [locationList]);
 
     return (
-        <section className="form-savelocation-container">
-            <h4>Pas jouw voorkeuren hier aan.</h4>
+        <section className="outer-container">
+           {/*<form>*/}
+            <h4>Pas jouw voorkeuren hier aan</h4>
+            <div className="form-savelocation-container">
             <LocationForm onAddLocation={addLocation} error={error} loading={loading} />
+                {locationList.length === 0 && (
+                    <p className="warning" >
+                        Voer ten minste één locatie in.
+                    </p>
+                )}
+
             <LocationList locations={locationList} onDeleteLocation={deleteLocation} />
+            </div>
+           {/*</form>*/}
         </section>
     );
 }

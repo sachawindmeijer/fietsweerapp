@@ -1,9 +1,12 @@
-.preferences-button {
-    width: auto;
-}
-
 .button-container {
     display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.preferences-button {
+    display: flex;
+    flex: 1;
     justify-content: center;
-    margin-top: 20px;
+    margin: auto
 }

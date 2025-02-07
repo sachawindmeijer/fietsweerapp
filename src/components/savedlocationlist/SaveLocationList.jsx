@@ -32,7 +32,6 @@ function SavedLocationList({ onWeatherDataFetched, onError }) {
                 if (onWeatherDataFetched) {
                     onWeatherDataFetched(weatherData);
                 }
-
                 console.log("Weerdata succesvol opgehaald:", weatherData);
             } catch (err) {
                 console.error("Fout bij ophalen van gegevens:", err.message);
@@ -42,12 +41,11 @@ function SavedLocationList({ onWeatherDataFetched, onError }) {
                 }
             }
         };
-
         fetchWeatherData();
     }, [locationList, preferencesList, onWeatherDataFetched, onError]);
 
     if (error) {
-        return <span className="weather-error"><p>{error}</p></span>;
+        return <span><p>{error}</p></span>;
     }
 
     return <WeatherCardList weatherData={locationListWeatherData} />;

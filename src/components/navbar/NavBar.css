@@ -6,6 +6,8 @@
     align-items: center;
     justify-content: center;
     color: #ffffff;
+    flex: 1 1 auto;
+    min-width: 320px;
 }
 
 .nav-links {
@@ -15,14 +17,17 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    width: 100%;
+    flex: 1 1 600px;
     max-width: 1000px;
     color: #ffffff;
 }
 
 .nav-links li {
-    margin: 0 124px;
+    flex: 1 1 auto;
     color: #ffffff;
+    white-space: nowrap;
+    text-align: center;
+
 }
 
 .nav-links li a {
@@ -30,6 +35,8 @@
     color: #ffffff;
     display: block;
     padding: 20px;
+    flex: 1 1 150px;
+    text-align: center;
 }
 
 .nav-links li a:hover {

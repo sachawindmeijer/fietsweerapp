@@ -1,5 +1,7 @@
 import React from 'react';
 import Button from "../button/Button.jsx";
+import "./LocationList.css"
+
 function LocationList({ locations = [], onDeleteLocation }) {
     if (!Array.isArray(locations)) {
         console.error('Locations is geen array:', locations);
@@ -15,6 +17,7 @@ function LocationList({ locations = [], onDeleteLocation }) {
                 }
 
                 return (
+                    <div className="list-container">
                     <article key={id} className="location-card">
                         <p className="location-name">{location}</p>
                         {onDeleteLocation && (
@@ -26,6 +29,7 @@ function LocationList({ locations = [], onDeleteLocation }) {
                             />
                         )}
                     </article>
+                    </div>
                 );
             })}
         </section>

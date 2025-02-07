@@ -6,9 +6,13 @@ import Button from "../button/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import InputField from "../inputField/InputField.jsx";
 
+import {LocationContext} from "../../context/LocationContext.jsx";
+
 function Preferences({ defaultValues = {}, onSave }) {
     const navigate = useNavigate();
     const [preferencesList] = useContext(PreferencesContext);
+    const [locationList] = useContext(LocationContext);
+
     const formDefaultValues = {
         temperature: defaultValues.temperature || preferencesList.preferredWeather.temperature,
         cloudiness: defaultValues.cloudiness || preferencesList.preferredWeather.cloudiness,
@@ -22,6 +26,9 @@ function Preferences({ defaultValues = {}, onSave }) {
 
     const watchCloudiness = watch("cloudiness");
     const watchWindspeed = watch("windspeed");
+    console.log(watchWindspeed);
+
+    const isSaveDisabled = locationList.length === 0;
 
     const onSubmit = (data) => {
         console.log("Formuliergegevens:", data); // Controleer de output
@@ -35,9 +42,9 @@ function Preferences({ defaultValues = {}, onSave }) {
     return (
         <main>
             <form onSubmit={handleSubmit(onSubmit)}>
-                {/* Temperatuurvoorkeur */}
+
                 <article>
-                    <h3>Temperatuurvoorkeur</h3>
+                    <h4>Weervoorkeur</h4>
                     <p>Koud - Warm</p>
                     <InputField
                         type="range"
@@ -80,6 +87,7 @@ function Preferences({ defaultValues = {}, onSave }) {
                         className="preferences-button"
                         type="submit"
                         text="Opslaan"
+                        disabled={isSaveDisabled}
                     />
                 </div>
             </form>

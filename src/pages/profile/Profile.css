@@ -1,43 +1,36 @@
 .outer-container {
-    padding: 15px 20px 10px 20px;
     display: flex;
+    padding: 15px 20px 10px 20px;
     justify-content: center;
     flex-wrap: wrap;
-    /*min-height: 500px;*/
-
+    flex-basis: 100%;
 }
 
-.city-and-preferences-container {
+.saved-cities-container{
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    flex-basis: 48%; /* Neemt ongeveer de helft van de beschikbare ruimte in */
+    min-width: 300px;
+    max-width: 600px;
+}
+
+.preferences-inner-container {
+    display: flex;
     justify-content: center;
+    flex-basis: 100%;
 }
 
 .saved-cities-container,
 .preferences-container {
-    min-width: 400px;
+    flex-basis: 48%;
+    min-width: 320px;
+    max-width: 100px;
     padding: 5px;
     background: #2a5fff;
     border-radius: 5px;
     margin: 8px;
 }
-
-.preferences-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.save-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-}
+/*dit hier boven moet blijven staan*/
 
 .save-button:hover {
     background-color: #45a049;
@@ -47,52 +40,18 @@
     background-color: #aaa;
 }
 
-.city-and-preferences-container .outer-container .saved-cities-container {
-    border: orange;
-}
 
-.preferences-container .preferences-content {
-    border: orangered;
-}
-.background {
-    position: relative;
-
-}
 main {
     flex: 1;
 }
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
 
-.preferences-content .preferences-container .outer-container {
-    border: blueviolet;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-}
-.button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.preferences-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.preferences-button:hover {
-    background-color: #0056b3;
+@media (max-width: 768px) {
+    .preferences-inner-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .saved-cities-container,
+    .preferences-container {
+        flex-basis: 100%; /* Zet containers onder elkaar op kleinere schermen */
+    }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputField = React.forwardRef(({ type, id, name, placeholder, value, onChange, onKeyUp, register }, ref) => {
+const InputField = React.forwardRef(({ type, id, name, placeholder, value, onChange, onKeyUp, register, ...rest }, ref) => {
     return (
         <input
             type={type}
@@ -11,7 +11,8 @@ const InputField = React.forwardRef(({ type, id, name, placeholder, value, onCha
             onChange={onChange}
             onKeyUp={onKeyUp}
             ref={ref}  // Forward the ref
-            {...register && register}
+            {...(register ? register : {})}
+            {...rest}
         />
     );
 });

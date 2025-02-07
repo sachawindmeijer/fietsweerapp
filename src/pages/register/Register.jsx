@@ -58,7 +58,6 @@ function Register() {
     }
 
     return (
-        <div>
             <main>
                 <div className="background">
                     <HeaderWeather/>
@@ -147,7 +146,6 @@ function Register() {
                     <Footer/>
                 </div>
             </main>
-        </div>
     );
 }
 export default Register;

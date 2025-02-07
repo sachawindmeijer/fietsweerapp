@@ -60,7 +60,7 @@ function SignIn() {
     }
 
     return (
-        <div>
+
             <main>
                 <div className="background">
                     <HeaderWeather/>
@@ -107,8 +107,6 @@ function SignIn() {
                 </div>
 
             </main>
-
-        </div>
     );
 }
 

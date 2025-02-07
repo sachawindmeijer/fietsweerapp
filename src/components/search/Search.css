@@ -2,22 +2,26 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    /*border: solid 2px darkred;*/
+    flex: 1 1 auto;
+    min-width: 250px;
 }
 
 .searchbar-entry {
     display: flex;
-    width: 100%;
+    flex: 1 1 70%;
     background-color: #d3d3d3;
     padding: 0 0 0 3px;
     border-radius: 0 0 0 5px;
+    min-width: 150px;
 }
 
 .searchbar-button {
     display: flex;
-    width: 50%;
+    flex: 1 1 30%;
     justify-content: center;
     padding: 2px;
     background-color: #2a5fff;
-   border-radius: 0 0 5px 0;
+    border-radius: 0 0 5px 0;
+    min-width: 80px;
+    max-width: 150px;
 }

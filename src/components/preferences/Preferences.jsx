@@ -1,22 +1,31 @@
-import React, {useContext} from "react";
+import React from "react";
 import {useForm} from "react-hook-form";
-import {PreferencesContext} from "../../context/PreferencesContext";
+
 import "./Preferences.css"
 import Button from "../button/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import InputField from "../inputField/InputField.jsx";
 
-import {LocationContext} from "../../context/LocationContext.jsx";
+
 
 function Preferences({ defaultValues = {}, onSave }) {
     const navigate = useNavigate();
-    const [preferencesList] = useContext(PreferencesContext);
-    const [locationList] = useContext(LocationContext);
+    // const [preferencesList] = useContext(PreferencesContext);
+    const storedLocations = localStorage.getItem("locations");
+    const locationList = storedLocations ? JSON.parse(storedLocations) : [];
+
+    // Lees de voorkeuren direct uit de localStorage
+    const storedPreferences = localStorage.getItem("preferences");
+    const parsedPreferences =
+        storedPreferences && storedPreferences !== "undefined"
+            ? JSON.parse(storedPreferences)
+            : { preferredWeather: { temperature: 0, cloudiness: 0, windspeed: 0 } };
+
 
     const formDefaultValues = {
-        temperature: defaultValues.temperature || preferencesList.preferredWeather.temperature,
-        cloudiness: defaultValues.cloudiness || preferencesList.preferredWeather.cloudiness,
-        windspeed: defaultValues.windspeed || preferencesList.preferredWeather.windspeed,
+        temperature: defaultValues.temperature || parsedPreferences.preferredWeather.temperature,
+        cloudiness: defaultValues.cloudiness || parsedPreferences.preferredWeather.cloudiness,
+        windspeed: defaultValues.windspeed || parsedPreferences.preferredWeather.windspeed,
         ...defaultValues
     };
 
@@ -31,57 +40,73 @@ function Preferences({ defaultValues = {}, onSave }) {
     const isSaveDisabled = locationList.length === 0;
 
     const onSubmit = (data) => {
-        console.log("Formuliergegevens:", data); // Controleer de output
+        console.log("Formuliergegevens:", data);
+
+        const updatedPreferences = {
+            preferredWeather: {
+                temperature: data.temperature,
+                cloudiness: data.cloudiness,
+                windspeed: data.windspeed,
+            },
+        };
+        localStorage.setItem("preferences", JSON.stringify(updatedPreferences));
+
         if (onSave) {
             onSave(data);
         }
-        // Navigeer naar home nadat je de gegevens hebt opgeslagen
-        navigate('/');
+
+        navigate("/");
     };
+
 
     return (
         <main>
+            <h4>Weervoorkeur</h4>
             <form onSubmit={handleSubmit(onSubmit)}>
-
-                <article>
-                    <h4>Weervoorkeur</h4>
-                    <p>Koud - Warm</p>
+                <fieldset>
+                    <legend>Temparatuur</legend>
+                    <div className="preference-input">
                     <InputField
                         type="range"
                         id="temperature"
                         min="0"
                         max="60"
-
-                        {...register("temperature")}
+                        {...register('temperature')}
                     />
-                </article>
+                    <label htmlFor="temperature">Koud - Warm</label>
+                    </div>
+                </fieldset>
 
-                {/* Bewolking */}
-                <article>
-                    <p>Bewolking: {watchCloudiness}%</p>
+                <fieldset>
+                    <legend>Bewolking</legend>
+                    <div className="preference-input">
                     <InputField
                         type="range"
                         id="cloudiness"
                         min="0"
                         max="100"
-
-                        {...register("cloudiness")}
+                        {...register('cloudiness')}
                     />
-                </article>
+                    <label htmlFor="cloudiness">Bewolking: {watchCloudiness}%</label>
+                    </div>
+                </fieldset>
 
-                {/* Windsnelheid */}
-                <article>
-                    <p>Windkracht: {watchWindspeed}</p>
+
+                <fieldset>
+                    <legend>Windsnelheid</legend>
+                    <div className="preference-input">
                     <InputField
                         type="range"
                         id="windspeed"
                         min="0"
                         max="12"
-                        {...register("windspeed")}
+                        {...register('windspeed')}
                     />
-                </article>
+                    <label htmlFor="windspeed">Windkracht: {watchWindspeed}</label>
+                    </div>
+                </fieldset>
 
-                {/* Opslaan-knop */}
+
                 <div className="button-container">
                     <Button
                         className="preferences-button"

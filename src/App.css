@@ -146,6 +146,9 @@ nav a:active {
     animation: rotating 1.5s linear infinite;
 
 }
+fieldset{
+    border: none;
+}
 
 @keyframes rotating {
     from {

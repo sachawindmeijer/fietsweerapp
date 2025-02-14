@@ -16,13 +16,13 @@ import InputField from "../../components/inputField/InputField.jsx";
 
 function SignIn() {
     const {handleSubmit, register} = useForm();
-    const apiKey = import.meta.env.DATA_API_KEY;
-    const [error, toggleError] = useState(false);
+    const apiKey = import.meta.env.VITE_DATA_API_KEY;
+    const [error, setError] = useState(false);
     const {login} = useContext(AuthContext);
 
     async function onSubmit(data) {
         console.log("signin", data)
-        toggleError(false);
+        setError(false);
 
         try {
             const result = await axios.post('https://api.datavortex.nl/fietsweerapp/users/authenticate', {
@@ -39,14 +39,12 @@ function SignIn() {
 
             const token = result.data.jwt;
 
-
-
             if (isTokenValid(token)) {
                 console.log("Token is valid!");
                 login(token);
             } else {
                 console.error("Token is invalid or expired.");
-                toggleError(true);
+                setError(true);
             }
 
         } catch (e) {
@@ -55,58 +53,68 @@ function SignIn() {
             if (e.response && e.response.data) {
                 console.log("Error details:", e.response.data);
             }
-            toggleError(true);
+            setError(true);
         }
     }
 
     return (
 
-            <main>
-                <div className="background">
-                    <HeaderWeather/>
-                    <NavBar/>
-                    <div className="outer-container">
-                        <section className="form-wrapper">
-                            <p className="form-header">Vul het formulier in om in te loggen</p>
-                            {/*<div className="form-container">*/}
-                                <form onSubmit={handleSubmit(onSubmit)} className="form">
-                                    <label htmlFor="username-field" className="input-container">
-                                        Gebruikersnaam:
-                                        <InputField
-                                            type="text"
-                                            id="username-field"
-                                            register={register("username", { required: true })}
+        <main>
+            <div className="background">
+                <HeaderWeather />
+                <NavBar />
+                <div className="outer-container">
+                    <div className="inner-container">
+                    <section className="form-wrapper">
+                        {/*<p className="form-header">Vul het formulier in om in te loggen</p>*/}
+                        <form onSubmit={handleSubmit(onSubmit)} >
+                            <fieldset>
+                                <legend>Vul het formulier in om in te loggen</legend>
+                                <div className="input-container">
+                                    <label htmlFor="username-field">Gebruikersnaam:</label>
+                                    <InputField
+                                        type="text"
+                                        id="username-field"
                                         placeholder="Je gebruikersnaam"
-                                        />
-                                    </label>
-
-                                    <label htmlFor="password-field" className="input-container">
-                                        Wachtwoord:
-                                        <InputField
-                                            type="password"
-                                            id="password-field"
-                                            register={register("password", { required: true })}
-                                            placeholder="Je wachtwoord"
-                                        />
-                                    </label>
-                                    {error &&
-                                        <p className="error">Combinatie van emailadres en wachtwoord is onjuist</p>}
-
-                                    <Button
-                                        className="form-button"
-                                        type="submit"
-                                        text='Inloggen'
+                                        {...register('username', { required: 'Gebruikersnaam is verplicht' })}
                                     />
-                                </form>
-                            {/*</div>*/}
-                        </section>
-                        <p className="out-text">Heb je nog geen account? <Link to="/registreren">Registreer</Link> je
-                            dan eerst.</p>
-                    </div>
-                    <Footer/>
-                </div>
+                                    {error.username && (
+                                        <p className="error">{error.username.message}</p>
+                                    )}
+                                </div>
 
-            </main>
+                                <div className="input-container">
+                                    <label htmlFor="password-field">Wachtwoord:</label>
+                                    <InputField
+                                        type="password"
+                                        id="password-field"
+                                        placeholder="Je wachtwoord"
+                                        {...register('password', { required: 'Wachtwoord is verplicht' })}
+                                    />
+                                    {error.password && (
+                                        <p className="error">{error.password.message}</p>
+                                    )}
+                                </div>
+                            </fieldset>
+
+                            {error && (
+                                <p className="error">
+                                    Combinatie van emailadres en wachtwoord is onjuist
+                                </p>
+                            )}
+
+                            <Button className="form-button" type="submit" text="Inloggen" />
+                        </form>
+                    </section>
+                    <p className="account-info">
+                        Heb je nog geen account? Je kunt je  {' '}
+                        <Link to="/registreren">hier</Link> registreren.
+                    </p>
+                    </div>
+                </div>
+                <Footer />
+            </div>
+        </main>
     );
 }
 

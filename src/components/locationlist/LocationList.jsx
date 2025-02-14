@@ -4,7 +4,6 @@ import "./LocationList.css"
 
 function LocationList({ locations = [], onDeleteLocation }) {
     if (!Array.isArray(locations)) {
-        console.error('Locations is geen array:', locations);
         return <p>Er is een onverwachte fout opgetreden.</p>;
     }
 
@@ -17,8 +16,8 @@ function LocationList({ locations = [], onDeleteLocation }) {
                 }
 
                 return (
-                    <div className="list-container">
-                    <article key={id} className="location-card">
+                    <div key={id} className="list-container">
+                        <article className="location-card">
                         <p className="location-name">{location}</p>
                         {onDeleteLocation && (
                             <Button

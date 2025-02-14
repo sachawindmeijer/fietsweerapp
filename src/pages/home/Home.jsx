@@ -18,7 +18,7 @@ import Button from "../../components/button/Button.jsx";
 
 
 function Home() {
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
     const [location, setLocation] = useState('');
     const [weatherData, setWeatherData] = useState(null);
     const [loading, toggleLoading] = useState(false);

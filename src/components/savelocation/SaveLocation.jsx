@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useContext} from "react";
-import {LocationContext} from "../../context/LocationContext.jsx";
 import "./SaveLocation.css"
 
 
@@ -15,7 +14,15 @@ function SaveLocation({
 
                       }) {
 
-    const [locationList, setLocationList] = useContext(LocationContext);
+    const [locationList, setLocationList] = useState(() => {
+        try {
+            const storedLocations = localStorage.getItem('locations');
+            return storedLocations ? JSON.parse(storedLocations) : [];
+        } catch (e) {
+            console.error('Fout bij het uitlezen van locations uit localStorage:', e);
+            return [];
+        }
+    });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 

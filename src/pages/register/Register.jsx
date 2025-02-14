@@ -9,143 +9,143 @@ import "./Register.css";
 import Button from "../../components/button/Button.jsx";
 import Footer from "../../components/footer/Footer.jsx";
 import InputField from "../../components/inputField/InputField.jsx";
+
 function Register() {
     const {
         handleSubmit,
-        formState: {errors},
-        register
-    } = useForm({
-        criteriaMode: "all"
-    });
+        formState: { errors },
+        register,
+    } = useForm();
 
-    const [error, toggleError] = useState(false);
-    const [loading, toggleLoading] = useState(false);
-
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const apiKey = import.meta.env.VITE_DATA_API_KEY;
     const navigate = useNavigate();
 
-    async function onSubmit(data) {
-        console.log('SUBMITTED', data);
-        toggleError(false);
-        toggleLoading(true);
+    const onSubmit = async (data) => {
+        console.log('Form Submitted:', data);
+        setError('');
+        setLoading(true);
 
         try {
-            const response = await axios.post('https://api.datavortex.nl/fietsweerapp/users', {
+            await axios.post('https://api.datavortex.nl/fietsweerapp/users', {
                 username: data.username,
                 email: data.email,
                 password: data.password,
-                authorities: [
-                    { "authority": "USER" }
-                ]
+                authorities: [{ "authority": "USER" }],
             }, {
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-Api-Key': 'fietsweerapp:hBH5OAPQhRKCdFlifgTZ'  // Zorg ervoor dat de juiste API-key wordt gebruikt
-                }
+                    'X-Api-Key': apiKey,
+                },
             });
-
-            console.log('response', response.data);
             navigate('/login');
         } catch (error) {
             console.error('Request failed:', error.message);
-
-        }   if (e.response) {
-            console.error('Response Data:', e.response.data);
-            console.error('Response Status:', e.response.status);
-            console.error('Response Headers:', e.response.headers);
+            if (error.response && error.response.status === 409) {
+                // Specifieke fout voor een conflict (bijv. e-mail al in gebruik)
+                setError('Dit e-mailadres is al in gebruik. Probeer een ander e-mailadres.');
+            } else {
+                setError('Er is een onbekende fout opgetreden. Probeer het later opnieuw.');
+            }
         }
-
-        toggleLoading(false);
-    }
+        setLoading(false);
+    };
 
     return (
-            <main>
-                <div className="background">
-                    <HeaderWeather/>
-                    <NavBar/>
-                    <div className="outer-container">
-                        <section className="form-wrapper">
-                            <p>Het het formulier in om je te kunnen aanmelden</p>
-                            <form onSubmit={handleSubmit(onSubmit)} className="form">
-                                <label htmlFor="username-field" className="input-container">
-                                    Gebruikersnaam:
-                                    <InputField
-                                        type="text"
-                                        id="username-field"
-                                        name="username"
-                                        placeholder="Gebruikersnaam"
-                                        register={register("username", {
-                                            required: "Dit moet ingevuld zijn",
-                                        })}
-                                    />
-                                    <ErrorMessage
-                                        errors={errors}
-                                        name="username"
-                                        render={({message}) => <p>{message}</p>}
-                                    />
-                                </label>
+    <main>
+        <div className="background">
+            <HeaderWeather />
+            <NavBar />
 
-                                <label htmlFor="email-field" className="input-container">
-                                    E-mail:
-                                    <InputField
-                                        type="text"
-                                        id="email-field"
-                                        name="email"
-                                        placeholder="E-mail"
-                                        register={register("email", {
-                                            required: "Dit moet ingevuld zijn",
-                                            pattern: {
-                                                value: /^(.+)@(.+)$/,
-                                                message: "Er mist nog een @",
-                                            },
-                                        })}
-                                        className="input-field"
-                                    />
-                                    <ErrorMessage
-                                        errors={errors}
-                                        name="email"
-                                        render={({message}) => <p>{message}</p>}
-                                    />
-                                </label>
+            <div className="outer-container">
+                <div className="inner-container">
+                {/*<p className="account-info">*/}
+                {/*    Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.*/}
+                {/*</p>*/}
 
-                                <label htmlFor="password-field" className="input-container">
-                                    Wachtwoord:
-                                    <InputField
-                                        type="password"
-                                        id="password-field"
-                                        name="password"
-                                        placeholder="Wachtwoord"
-                                        register={register("password", {
-                                            required: "Dit moet ingevuld zijn",
-                                            minLength: {
-                                                value: 6,
-                                                message: "Het wachtwoord is te kort",
-                                            },
-                                        })}
-                                        className="input-field"
-                                    />
-                                    <ErrorMessage
-                                        errors={errors}
-                                        name="password"
-                                        render={({message}) => <p>{message}</p>}
-                                    />
-                                </label>
-                                {error &&
-                                    <p className="error">Dit account bestaat al. Probeer een ander emailadres.</p>}
-                                <Button
-                                    className="buttonR"
-                                    type="submit"
-                                    disabled={loading}
-                                    text='Registreren'
+                <section className="form-wrapper">
+                    {/*<p>Vul het formulier in om je te registreren.</p>*/}
+                    <form onSubmit={handleSubmit(onSubmit)} className="form">
+                        <fieldset>
+                            <legend>Vul het formulier in om je te registreren.</legend>
+                            <div className="input-container">
+                                <label htmlFor="username-field">Gebruikersnaam:</label>
+                                <InputField
+                                    type="text"
+                                    id="username-field"
+                                    name="username"
+                                    placeholder="Gebruikersnaam"
+                                    register={register("username", { required: "Dit moet ingevuld zijn" })}
                                 />
-                            </form>
-                        </section>
-                        <p className="linkstekst">Heb je al een account? Je kunt je <Link
-                            to="/login">hier</Link> inloggen.
-                        </p>
-                    </div>
-                    <Footer/>
-                </div>
-            </main>
-    );
+                                <ErrorMessage
+                                    errors={errors}
+                                    name="username"
+                                    render={({ message }) => <p className="error">{message}</p>}
+                                />
+                            </div>
+
+                            <div className="input-container">
+                                <label htmlFor="email-field">E-mail:</label>
+                                <InputField
+                                    type="email"
+                                    id="email-field"
+                                    name="email"
+                                    placeholder="E-mail"
+                                    register={register("email", {
+                                        required: "Dit moet ingevuld zijn",
+                                        pattern: { value: /^(.+)@(.+)$/, message: "Er mist nog een @" },
+                                    })}
+                                    // className="input-field"
+                                />
+                                <ErrorMessage
+                                    errors={errors}
+                                    name="email"
+                                    render={({ message }) => <p className="error">{message}</p>}
+                                />
+                            </div>
+
+                            <div className="input-container">
+                                <label htmlFor="password-field">Wachtwoord:</label>
+                                <InputField
+                                    type="password"
+                                    id="password-field"
+                                    name="password"
+                                    placeholder="Wachtwoord"
+                                    register={register("password", {
+                                        required: "Dit moet ingevuld zijn",
+                                        minLength: { value: 6, message: "Het wachtwoord is te kort" },
+                                    })}
+                                    // className="input-field"
+                                />
+                                <ErrorMessage
+                                    errors={errors}
+                                    name="password"
+                                    render={({ message }) => <p className="error">{message}</p>}
+                                />
+                            </div>
+                        </fieldset>
+
+                        {error && <p className="error">{error}</p>}
+
+                        <Button
+                            className="buttonR"
+                            type="submit"
+                            disabled={loading}
+                            text="Registreren"
+                        />
+                    </form>
+                </section>
+                    <p className="account-info">
+                        Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.
+                    </p>
+            </div>
+
+            </div>
+            <Footer />
+        </div>
+    </main>
+);
 }
+
 export default Register;

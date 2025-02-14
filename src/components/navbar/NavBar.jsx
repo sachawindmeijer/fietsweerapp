@@ -2,11 +2,16 @@ import React, {useContext} from "react";
 import {Link,} from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext";
 import "./NavBar.css"
+import Button from "../button/Button.jsx";
 
 
 function NavBar() {
     const {isAuth, logout} = useContext(AuthContext)
 
+    function handleLogout() {
+        logout();
+        console.log("User logged out");
+    }
 
     return (
         <nav className="nav-bar">
@@ -17,21 +22,13 @@ function NavBar() {
                         </li>
 
                         <li className="links">
-                            {isAuth ?
-                                <Link
-                                    to="/loguit"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        logout();
-                                        console.log('Logout clicked');
-                                    }}
-                                >
-                                    Log out
-                                </Link> : <Link
-                                    to="/login"
-                                >
-                                    log in
-                                </Link>}
+                            {isAuth ? (
+                                <Button className="logout-button" onClick={handleLogout}>
+                                    Log uit
+                                </Button>
+                            ) : (
+                                <Link to="/login">Log in</Link>
+                            )}
                             </li>
                             <li className="links">
                                 <Link

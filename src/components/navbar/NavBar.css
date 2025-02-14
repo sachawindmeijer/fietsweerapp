@@ -12,7 +12,7 @@
 
 .nav-links {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     list-style: none;
     padding: 0;
@@ -22,7 +22,7 @@
     color: #ffffff;
 }
 
-.nav-links li {
+.nav-links  li {
     flex: 1 1 auto;
     color: #ffffff;
     white-space: nowrap;
@@ -30,7 +30,7 @@
 
 }
 
-.nav-links li a {
+.nav-links  li a {
     text-decoration: none;
     color: #ffffff;
     display: block;
@@ -39,10 +39,17 @@
     text-align: center;
 }
 
-.nav-links li a:hover {
+.nav-links  logout-button li a:hover {
     text-decoration: underline;
     color: #ffffff
 }
 .links {
     color: #ffffff
+}
+.logout-button{
+    display: block;
+    margin: 0 auto;
+justify-content: center;
+
+    font-size: 14px;
 }

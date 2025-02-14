@@ -1,17 +1,28 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {LocationContext} from "../../context/LocationContext.jsx";
-import {PreferencesContext} from "../../context/PreferencesContext.jsx";
 import WeatherCardList from "../weathercardlist/WeatherCardList.jsx";
 import fetchWeather from "../weather/weather.jsx";
 import CalculateWeightedScore from "../../helpers/CalculateWeightedScore.jsx";
 
 
 function SavedLocationList({ onWeatherDataFetched, onError }) {
-    const [locationList] = useContext(LocationContext);
-    const [preferencesList] = useContext(PreferencesContext);
+    const [locationList] = useState(() => {
+        const storedLocations = localStorage.getItem("locations");
+        return storedLocations ? JSON.parse(storedLocations) : [];
+    });
+
     const [locationListWeatherData, setLocationListWeatherData] = useState([]);
     const [error, setError] = useState(null);
+
+    let preferences = { preferredWeather: { temperature: 0, cloudiness: 0, windspeed: 0 } };
+    const storedPreferences = localStorage.getItem("preferences");
+    if (storedPreferences && storedPreferences !== "undefined") {
+        try {
+            preferences = JSON.parse(storedPreferences);
+        } catch (err) {
+            console.error("Fout bij het parsen van preferences uit localStorage:", err);
+        }
+    }
 
     useEffect(() => {
         const fetchWeatherData = async () => {
@@ -21,7 +32,7 @@ function SavedLocationList({ onWeatherDataFetched, onError }) {
                     locationList.map(async (place) => {
                         console.log("Ophalen gegevens voor:", place.location);
                         const data = await fetchWeather(place.location);
-                        const weightedScore = CalculateWeightedScore(data, preferencesList.preferredWeather);
+                        const weightedScore = CalculateWeightedScore(data, preferences.preferredWeather);
                         return { ...data, score: weightedScore };
                     })
                 );
@@ -42,7 +53,7 @@ function SavedLocationList({ onWeatherDataFetched, onError }) {
             }
         };
         fetchWeatherData();
-    }, [locationList, preferencesList, onWeatherDataFetched, onError]);
+    }, [locationList, onWeatherDataFetched, onError]);
 
     if (error) {
         return <span><p>{error}</p></span>;

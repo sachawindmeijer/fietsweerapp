@@ -1,9 +1,10 @@
 import React from "react";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import './HeaderWeather.css'
 
-function HeaderWeather({ title, onClick }) {
+function HeaderWeather({ title}) {
     const location = useLocation();
+    const navigate = useNavigate();
 
     function getPageName() {
         switch (location.pathname) {
@@ -21,9 +22,11 @@ function HeaderWeather({ title, onClick }) {
                 return "Onbekende pagina";
         }
     }
-
+    const handleClick = () => {
+        navigate("/");  // or any other page you want to redirect to
+    };
     return (
-        <header className="headerBar" onClick={onClick}>
+        <header className="headerBar" onClick={handleClick}>
             <h1>{title}</h1>
             <h3>{getPageName()}</h3>
         </header>

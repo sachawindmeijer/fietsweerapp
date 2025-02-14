@@ -10,3 +10,10 @@
     justify-content: center;
     margin: auto
 }
+.preference-input{
+    display: flex;
+    flex-Direction: column;
+    align-Items: center;
+    margin-bottom: 9px;
+    /*border: black solid 4px;*/
+}

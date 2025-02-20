@@ -3,10 +3,10 @@
 ## Inhoudsopgave
 1. [Introductie](#introductie)
 2. [Benodigdheden](#benodigdheden)
-3. [Installeren](#instaleren)
+3. [Installeren](#Instaleren)
 4. [Extra toelichting](#extra-toelichting)
 
-<a name="introductie"></a>
+<a name="Introductie"></a>
 
 ## Introductie
 Deze applicatie toont het huidige weer en de weersvoorspelling voor de huidige dag. Gebruikers kunnen inloggen om hun favoriete locaties op te slaan en gepersonaliseerde weersvoorspellingen te ontvangen.

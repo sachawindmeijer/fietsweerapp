@@ -1,27 +1,24 @@
 import jwtDecode from "jwt-decode";
 
 function isTokenValid(token) {
+    if (!token) {
+        console.error("Geen token opgegeven.");
+        return false;
+    }
+
     try {
+        const { exp } = jwtDecode(token);
 
-
-        const decodedToken = jwtDecode(token);
-        console.log("jwtdecode", decodedToken)
-
-        if (!decodedToken.exp) {
-            console.error("Token mist claim voor vervaltijd .");
+        if (!exp) {
+            console.error("Token mist een expiratietijd (exp-claim).");
             return false;
         }
 
-
-        const expirationTime = decodedToken.exp;
-
-
-        const currentTime = Math.floor(Date.now() / 1000); // More efficient for seconds
-        return expirationTime > currentTime;
+        return exp > Math.floor(Date.now() / 1000);
     } catch (error) {
-        console.error("Fout bij het decoderen van token:", error.message);
+        console.error("Ongeldig token:", error.message);
         return false;
     }
-}
+    }
 
 export default isTokenValid;

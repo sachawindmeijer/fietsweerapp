@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useContext} from "react";
-import axios from "axios";
 import {AuthContext} from "../../context/AuthContext";
 import './Home.css'
 import kelvinToCelcius from "../../helpers/kelvinToCelsius";
@@ -15,6 +14,7 @@ import fetchWeather from "../../components/weather/weather.jsx";
 import SavedLocationList from "../../components/savedlocationlist/SaveLocationList.jsx";
 import WeatherIcon from "../../helpers/WeatherIcon.jsx";
 import Button from "../../components/button/Button.jsx";
+import TomorrowWeather from "../../components/TomorrowWeather/TomorrowWeather.jsx";
 
 
 function Home() {
@@ -22,6 +22,7 @@ function Home() {
     const [location, setLocation] = useState('');
     const [weatherData, setWeatherData] = useState(null);
     const [loading, toggleLoading] = useState(false);
+    const [showTomorrow, setShowTomorrow] = useState(false);
     const {isAuth} = useContext(AuthContext)
     const navigate = useNavigate();
 
@@ -53,80 +54,92 @@ function Home() {
 
 
     return (
-            <main>
-                <div className="background">
-                    <HeaderWeather/>
-                    <NavBar/>
-                    <div className="outer-container">
-                        <div className="inner-container">
-                            {isAuth ?
-                                <section className="saved-cities-list-container">
-                                    <SavedLocationList/>
-                                    <div className="onder">
-                                        <Button
-                                            type="submit"
-                                            disabled={loading}
-                                            text={loading ? 'Bezig...' : 'Wijzigen'}
-                                            className="submit-button"
-                                            onClick={() => navigate('/profiel')}
-                                        />
-                                    </div>
-                                </section>
-                                :
-                                <article className="saved-cities-logout-container">
-                                    <p className="saved-cities-logout-message">
-                                        Maak een account of log in om jouw favoriete steden te bewaren en hier te
-                                        bekijken.
-                                    </p>
-
-                                </article>
-                            }
-                            <div className="right-container">
-                                <div className="image-and-search-container">
-                                    <div className="image-container">
-                                        <img src={kaart} alt="nederland kaart"/>
-                                    </div>
-
-                                    <section className="weather-search-container">
-                                        <Search setLocationHandler={setLocation}/>
-
-                                        {error &&
-                                            (<span>
-                          {error}
-                        </span>)}
-
-                                        <span>
-                        {loading && (<span>Loading...</span>)}
-
-
-                                            {weatherData && <article className="weather-data">
-                                                <h3 className="sort-info">{weatherData.name}: {kelvinToCelcius(weatherData.main.temp)} </h3>
-                                                <div className="icon-wrapper-search">
-                                                    <WeatherIcon type={weatherData.weather[0].main}/>
-
-
-                                                    <div className="info-weather">
-                                                        <p>{weatherData.weather[0].description}</p>
-                                                        <p>Windrichting: {windDirection(weatherData.wind.deg)}</p>
-
-                                                        <p>Windkracht: {windSpeed(weatherData.wind.speed)}</p>
-                                                        <p>Luchtvochtigheid: {weatherData.main.humidity}% </p>
-                                                        <p>Bewolking: {weatherData.clouds.all}%</p>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                            }
-                        </span>
-                                    </section>
+        <main>
+            <div className="background">
+                <HeaderWeather />
+                <NavBar />
+                <div className="outer-container">
+                    <div className="inner-container">
+                        {isAuth ? (
+                            <section className="saved-cities-list-container">
+                                <SavedLocationList />
+                                <div className="onder">
+                                    <Button
+                                        type="submit"
+                                        disabled={loading}
+                                        text={loading ? "Bezig..." : "Wijzigen"}
+                                        className="submit-button"
+                                        onClick={() => navigate("/profiel")}
+                                    />
                                 </div>
+                            </section>
+                        ) : (
+                            <article className="saved-cities-logout-container">
+                                <p className="saved-cities-logout-message">
+                                    Maak een account of log in om jouw favoriete steden te bewaren en hier te bekijken.
+                                </p>
+                            </article>
+                        )}
+
+                        <div className="right-container">
+                            <div className="image-and-search-container">
+                                <div className="image-container">
+                                    <img src={kaart} alt="Nederland kaart" />
+                                </div>
+
+                                <section className="weather-search-container">
+                                    <Search setLocationHandler={setLocation} />
+
+                                    {error && <span>{error}</span>}
+                                    {loading && <span>Loading...</span>}
+
+                                    {weatherData && (
+                                        <article className="weather-data">
+                                            <h3 className="sort-info">
+                                                {weatherData.name} :</h3>
+                                            <h4 className="sort-info">Vandaag</h4>
+                                            <span>{kelvinToCelcius(weatherData.main.temp)}</span>
+                                            <div className="icon-wrapper-search">
+                                                <WeatherIcon type={weatherData.weather[0].main} />
+                                                <div className="info-weather">
+                                                    <p>{weatherData.weather[0].description}</p>
+                                                    <p>Windrichting: {windDirection(weatherData.wind.deg)}</p>
+                                                    <p>Windkracht: {windSpeed(weatherData.wind.speed)}</p>
+                                                    <p>Luchtvochtigheid: {weatherData.main.humidity}%</p>
+                                                    <p>Bewolking: {weatherData.clouds.all}%</p>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    )}
+
+                                    {/* Knop om morgenweer te tonen/verbergen */}
+                                    {weatherData && weatherData.coord && (
+                                        <>
+                                            <Button
+                                                type="button"
+                                                text={showTomorrow ? "Verberg" : "Toon morgen"}
+                                                onClick={() => setShowTomorrow((prev) => !prev)}
+                                                className={`tomorrow-button ${showTomorrow ? "underline-top" : "underline-bottom"}`}
+                                            />
+                                            {showTomorrow && (
+                                                <TomorrowWeather
+                                                    coordinates={{
+                                                        lat: weatherData.coord.lat,
+                                                        lon: weatherData.coord.lon,
+                                                    }}
+                                                />
+                                            )}
+                                        </>
+                                    )}
+                                </section>
                             </div>
                         </div>
                     </div>
-                    <Footer/>
                 </div>
-
-            </main>
-    )
+                <Footer />
+            </div>
+        </main>
+    );
 }
 
-export default Home
+export default Home;

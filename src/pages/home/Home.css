@@ -29,15 +29,51 @@
 }
 
 
-.submit-button {
+.submit-button{
     display: flex;
     color: white;
     cursor: pointer;
     font-size: 14px;
     margin: 0 auto;
     justify-content: center;
-
 }
+.tomorrow-button{
+    color: #2a5fff;
+    display: flex;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 0;
+}
+.underline-top {
+    position: relative;
+}
+
+.underline-top::before {
+    content: "";
+    position: absolute;
+    top: 1px; /* Lijn boven de tekst */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #2a5fff;
+}
+
+.underline-bottom {
+    position: relative;
+}
+
+.underline-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: 1px; /* Lijn onder de tekst */
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #2a5fff;
+}
+
 .saved-cities-list-container, .saved-cities-logout-container {
     flex-basis: 48%;
     background: #2a5fff;
@@ -93,6 +129,7 @@
     flex-direction: column;
     flex-basis: 100%;
     min-width: 300px;
+    color: #2a5fff;
 }
 
 .info-weather{

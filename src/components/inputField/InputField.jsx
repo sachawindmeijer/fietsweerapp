@@ -16,7 +16,5 @@ const InputField = React.forwardRef((
     );
 });
 
-
-
 export default InputField;
 

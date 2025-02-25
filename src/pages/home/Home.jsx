@@ -28,20 +28,23 @@ function Home() {
 
 
     useEffect(() => {
+        const controller = new AbortController();
         async function getWeather() {
             try {
-                setError(null);  // Reset error when starting a new request
+                setError(null);
                 toggleLoading(true);
-                const data = await fetchWeather(location);
+                const data = await fetchWeather(location, {signal: controller.signal});
 
                 if (data.error) {
-                    setError(data.error);  // Set specific error message if there is an error
+                    setError(data.error);
                 } else {
-                    setWeatherData(data);  // Set weather data if no error
+                    setWeatherData(data);
                 }
             } catch (error) {
-                console.error(error);
-                setError("Er is een onbekende fout opgetreden. Probeer het later opnieuw.");
+                if (error.name !== 'AbortError') {
+                    console.error(error);
+                    setError("Er is een onbekende fout opgetreden. Probeer het later opnieuw.");
+                }
             } finally {
                 toggleLoading(false);
             }
@@ -50,7 +53,10 @@ function Home() {
         if (location) {
             getWeather();
         }
-    }, [location]);
+       return () => {
+        controller.abort();
+    };
+}, [location]);
 
 
     return (

@@ -3,7 +3,7 @@ import kelvinToCelcius from "../../helpers/kelvinToCelsius.jsx";
 const WeatherCardList = ({ weatherData }) => {
     console.log("Weather temp Data:", weatherData);
 
-    // Controleer of de ontvangen data een array is
+
     if (!Array.isArray(weatherData)) {
         console.error("Invalid data: weatherData should be an array.");
         return null;

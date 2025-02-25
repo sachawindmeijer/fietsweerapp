@@ -8,7 +8,7 @@ import DrizzleIcon from '../assets/icons/sun-rain.svg';
 import Thunder from '../assets/icons/thunder.svg';
 
 const WeatherIcon = ({ type }) => {
-    console.log("Weather type received:", type); // Debugging log
+    console.log("Weather type received:", type);
     const weatherIcons = {
         Clear: <img src={SunnyIcon} alt="Sunny weather" />,
         Clouds: <img src={CloudyIcon} alt="Cloudy weather" />,

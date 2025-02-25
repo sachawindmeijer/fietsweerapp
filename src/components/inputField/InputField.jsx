@@ -9,7 +9,7 @@ const InputField = React.forwardRef((
             name={name}
             placeholder={placeholder}
             value={value}
-            ref={ref}  // Forward the ref
+            ref={ref}
             {...(register ? register : {})}
             {...rest}
         />

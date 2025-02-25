@@ -28,7 +28,7 @@ const WeatherCardList = ({ weatherData }) => {
                     <WeatherOverview
                         key={locationWeather.id || locationWeather.name || Math.random()}
                         name={locationWeather.name}
-                        temp={temp} // Verwerkte temperatuur
+                        temp={temp}
                         score={locationWeather.score}
                         weatherMain={locationWeather.weather?.[0]?.main}
                         weatherDescription={locationWeather.weather?.[0]?.description}

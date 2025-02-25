@@ -34,11 +34,11 @@ function WeatherOverview({
                 <p>{weatherDescription}</p>
 
                 <p><span className="flex"><img src={windSockIcon} alt="Windsok" width="20"/>
-                :{windSpeed(weatherWindSpeed)}, {windDirection(windDegree)}</span></p>
+                 {windSpeed(weatherWindSpeed)}, {windDirection(windDegree)}</span></p>
                 <p><span className="flex"><img src={humidityIcon} alt="Luchtvochtigheid" width="20"/>
-                :{humidity}%</span></p>
+                {humidity} %</span></p>
                 <p><span className="flex"><img src={cloudIcon} alt="bewolkt" width="20"/>
-                :{clouds}%</span></p>
+                {clouds} %</span></p>
             </div>
         </article>
     )

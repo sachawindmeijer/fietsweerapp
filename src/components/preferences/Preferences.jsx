@@ -10,11 +10,9 @@ import InputField from "../inputField/InputField.jsx";
 
 function Preferences({ defaultValues = {}, onSave }) {
     const navigate = useNavigate();
-    // const [preferencesList] = useContext(PreferencesContext);
     const storedLocations = localStorage.getItem("locations");
     const locationList = storedLocations ? JSON.parse(storedLocations) : [];
 
-    // Lees de voorkeuren direct uit de localStorage
     const storedPreferences = localStorage.getItem("preferences");
     const parsedPreferences =
         storedPreferences && storedPreferences !== "undefined"
@@ -54,7 +52,6 @@ function Preferences({ defaultValues = {}, onSave }) {
         if (onSave) {
             onSave(data);
         }
-
         navigate("/");
     };
 

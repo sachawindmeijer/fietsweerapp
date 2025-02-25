@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {AuthContext} from "../../context/AuthContext";
 import {useForm} from 'react-hook-form';
@@ -19,6 +19,14 @@ function SignIn() {
     const apiKey = import.meta.env.VITE_DATA_API_KEY;
     const [error, setError] = useState(false);
     const {login} = useContext(AuthContext);
+
+    useEffect(() => {
+        const controller = new AbortController();
+
+        return function cleanup() {
+            controller.abort(); // Annuleer lopende verzoeken bij unmount
+        };
+    }, []);
 
     async function onSubmit(data) {
         console.log("signin", data)
@@ -66,7 +74,7 @@ function SignIn() {
                 <div className="outer-container">
                     <div className="inner-container">
                     <section className="form-wrapper">
-                        {/*<p className="form-header">Vul het formulier in om in te loggen</p>*/}
+
                         <form onSubmit={handleSubmit(onSubmit)} >
                             <fieldset>
                                 <legend>Vul het formulier in om in te loggen</legend>

@@ -15,12 +15,14 @@ function TomorrowWeather({ coordinates, onWeatherFetched, onError }) {
     const apiKey = import.meta.env.VITE_WEER_API_KEY;
 
     useEffect(() => {
+        const controller = new AbortController();
         async function fetchTomorrowWeather() {
             setLoading(true);
             try {
                 setError(false);
                 const response = await axios.get(
-                    `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric&lang=nl`
+                    `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric&lang=nl`,
+                { signal: controller.signal }
                 );
 
                 const tomorrowForecasts = response.data.list.filter((singleForecast) => {
@@ -37,7 +39,6 @@ function TomorrowWeather({ coordinates, onWeatherFetched, onError }) {
                     return;
                 }
 
-
                 let bestForecast = tomorrowForecasts.reduce((prev, curr) => {
                     return Math.abs(new Date(curr.dt * 1000).getHours() - 12) <
                     Math.abs(new Date(prev.dt * 1000).getHours() - 12)
@@ -50,11 +51,14 @@ function TomorrowWeather({ coordinates, onWeatherFetched, onError }) {
                     onWeatherFetched(bestForecast);
                 }
             } catch (err) {
-                console.error("Fout bij ophalen van weersvoorspelling voor morgen", err);
-                setError(true);
-
-                if (onError) {
-                    onError(err);
+                if (err.code === 'ERR_CANCELED') {
+                    console.log("Request geannuleerd");
+                } else {
+                    console.error("Fout bij ophalen van weersvoorspelling voor morgen", err);
+                    setError(true);
+                    if (onError) {
+                        onError(err);
+                    }
                 }
             } finally {
                 setLoading(false);
@@ -64,7 +68,10 @@ function TomorrowWeather({ coordinates, onWeatherFetched, onError }) {
         if (coordinates) {
             fetchTomorrowWeather();
         }
-    }, [coordinates]);
+        return () => {
+            controller.abort();
+        };
+    }, [coordinates, apiKey, onError, onWeatherFetched]);
 
     return (
         <div className="tab">

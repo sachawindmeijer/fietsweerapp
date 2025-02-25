@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import axios from 'axios';
@@ -22,10 +22,21 @@ function Register() {
     const apiKey = import.meta.env.VITE_DATA_API_KEY;
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const controller = new AbortController();
+
+        return () => {
+            console.log("Annuleren van lopende requests");
+            controller.abort();
+        };
+    }, []);
+
     const onSubmit = async (data) => {
         console.log('Form Submitted:', data);
         setError('');
         setLoading(true);
+
+        const controller = new AbortController();
 
         try {
             await axios.post('https://api.datavortex.nl/fietsweerapp/users', {
@@ -38,15 +49,19 @@ function Register() {
                     'Content-Type': 'application/json',
                     'X-Api-Key': apiKey,
                 },
+                signal: controller.signal,
             });
             navigate('/login');
         } catch (error) {
-            console.error('Request failed:', error.message);
-            if (error.response && error.response.status === 409) {
-                // Specifieke fout voor een conflict (bijv. e-mail al in gebruik)
-                setError('Dit e-mailadres is al in gebruik. Probeer een ander e-mailadres.');
+            if (axios.isCancel(error)) {
+                console.log("Request geannuleerd");
             } else {
-                setError('Er is een onbekende fout opgetreden. Probeer het later opnieuw.');
+                console.error('Request failed:', error.message);
+                if (error.response && error.response.status === 409) {
+                    setError('Dit e-mailadres is al in gebruik. Probeer een ander e-mailadres.');
+                } else {
+                    setError('Er is een onbekende fout opgetreden. Probeer het later opnieuw.');
+                }
             }
         }
         setLoading(false);
@@ -60,12 +75,9 @@ function Register() {
 
             <div className="outer-container">
                 <div className="inner-container">
-                {/*<p className="account-info">*/}
-                {/*    Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.*/}
-                {/*</p>*/}
 
                 <section className="form-wrapper">
-                    {/*<p>Vul het formulier in om je te registreren.</p>*/}
+
                     <form onSubmit={handleSubmit(onSubmit)} className="form">
                         <fieldset>
                             <legend>Vul het formulier in om je te registreren.</legend>
@@ -116,7 +128,7 @@ function Register() {
                                         required: "Dit moet ingevuld zijn",
                                         minLength: { value: 6, message: "Het wachtwoord is te kort" },
                                     })}
-                                    // className="input-field"
+
                                 />
                                 <ErrorMessage
                                     errors={errors}

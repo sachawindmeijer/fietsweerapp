@@ -28,7 +28,7 @@ async function fetchWeather(location, options = {}) {
     } catch (error) {
         console.error("Error fetching weather:", error);
         if (error.response) {
-            // Als er een reactie is van de API met een foutstatuscode
+
             switch (error.response.status) {
                 case 404:
                     return {error: "Locatie niet gevonden. Controleer de spelling."};
@@ -40,7 +40,7 @@ async function fetchWeather(location, options = {}) {
                     return {error: "Onbekende fout opgetreden. Probeer het later opnieuw."};
             }
         } else {
-            // Fouten zoals netwerkproblemen of andere onverwachte fouten
+
             return {error: "Er is een probleem met de verbinding. Probeer het later opnieuw."};
         }
     }

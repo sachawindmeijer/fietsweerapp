@@ -1,8 +1,8 @@
-// import kelvinToCelcius from "../../helpers/kelvinToCelsius";
+
 import WeatherIcon from "../../helpers/WeatherIcon.jsx";
 import windDirection from "../../helpers/windDirection";
 import windSpeed from "../../helpers/windSpeed";
-import windSockIcon from "../../assets/icons/windsock.jpg"
+import windSockIcon from "../../assets/icons/windsock.png"
 import humidityIcon from "../../assets/icons/humidity.png"
 import cloudIcon from "../../assets/icons/clouds blue.png"
 import "./WeatherOverview.css"

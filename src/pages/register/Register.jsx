@@ -108,7 +108,7 @@ function Register() {
                                         required: "Dit moet ingevuld zijn",
                                         pattern: { value: /^(.+)@(.+)$/, message: "Er mist nog een @" },
                                     })}
-                                    // className="input-field"
+
                                 />
                                 <ErrorMessage
                                     errors={errors}

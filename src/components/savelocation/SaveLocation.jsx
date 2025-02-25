@@ -58,7 +58,6 @@ function SaveLocation({
     };
 
     useEffect(() => {
-        // Opslaan in localStorage
         try {
             localStorage.setItem('locations', JSON.stringify(locationList));
         } catch (error) {

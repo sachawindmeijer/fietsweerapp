@@ -24,7 +24,7 @@ function SignIn() {
         const controller = new AbortController();
 
         return function cleanup() {
-            controller.abort(); // Annuleer lopende verzoeken bij unmount
+            controller.abort();
         };
     }, []);
 

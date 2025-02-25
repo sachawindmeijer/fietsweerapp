@@ -23,7 +23,7 @@ function HeaderWeather({ title}) {
         }
     }
     const handleClick = () => {
-        navigate("/");  // or any other page you want to redirect to
+        navigate("/");
     };
     return (
         <header className="headerBar" onClick={handleClick}>
